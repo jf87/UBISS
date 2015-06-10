@@ -1,4 +1,4 @@
-<polymer-element name"uuid-input-element">
+<polymer-element name"list-input-element">
 	<template>
 		<style>
 			:host {
@@ -10,9 +10,9 @@
 		</style>
 		<div>
 			<paper-shadow class="card" z="2">
-			<input is="core-input" placeholder="type in your name here, please" value="{{uuid}}" committedValue="{{committedUuid}}">
+			<input is="core-input" placeholder="type in your shopping list here, please" value="{{list}}" committedValue="{{committedList}}">
 
-    		<p>uuid: {{uuid}}, committedUuid: {{committedUuid}}</p>
+			<p>list: {{list}}, committedList: {{committedList}}</p>
 			</paper-shadow>
 		</div>
 	</template>

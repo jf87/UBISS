@@ -1,0 +1,22 @@
+<polymer-element name"address-input-element">
+	<template>
+		<style>
+			:host {
+				position: absolute;
+				top: 25;
+				left: 25;
+				width: 100px;
+			}              
+		</style>
+		<div>
+			<paper-shadow class="card" z="2">
+			<input is="core-input" placeholder="type in your address here, please" value="{{address}}" committedValue="{{committedAddress}}">
+
+			<p>address: {{address}}, committedAddress: {{committedAddress}}</p>
+			</paper-shadow>
+		</div>
+	</template>
+<script>
+	Polymer({});
+</script>
+</polymer-element>
