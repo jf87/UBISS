@@ -1,0 +1,10 @@
+PODS:
+  - SwiftHTTP (0.9.5)
+
+DEPENDENCIES:
+  - SwiftHTTP (~> 0.9.4)
+
+SPEC CHECKSUMS:
+  SwiftHTTP: cd7b248bc07db02926ff54cf19b580b78f7abfa1
+
+COCOAPODS: 0.37.2

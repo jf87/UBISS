@@ -1,0 +1,17 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '8.0'
+
+target 'ubiss-ios' do
+
+end
+
+target 'ubiss-iosTests' do
+
+end
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'SwiftHTTP', '~> 0.9.4'
+

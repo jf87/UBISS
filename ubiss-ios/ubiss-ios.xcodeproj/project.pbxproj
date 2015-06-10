@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0A3725EBBF21E5AA044DC3B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E00B0E7DAF8FD804405295 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D68FFCEE1B287E6A002E9AD5 /* elderly.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D68FFCED1B287E69002E9AD5 /* elderly.jpg */; };
+		D68FFCF01B287F41002E9AD5 /* elderly.png in Resources */ = {isa = PBXBuildFile; fileRef = D68FFCEF1B287F41002E9AD5 /* elderly.png */; };
 		D69612F41B282EF20083022B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69612F31B282EF20083022B /* AppDelegate.swift */; };
 		D69612F71B282EF20083022B /* ubiss_ios.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D69612F51B282EF20083022B /* ubiss_ios.xcdatamodeld */; };
 		D69612F91B282EF20083022B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69612F81B282EF20083022B /* ViewController.swift */; };
@@ -14,6 +17,7 @@
 		D69612FE1B282EF20083022B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D69612FD1B282EF20083022B /* Images.xcassets */; };
 		D69613011B282EF20083022B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D69612FF1B282EF20083022B /* LaunchScreen.xib */; };
 		D696130D1B282EF20083022B /* ubiss_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696130C1B282EF20083022B /* ubiss_iosTests.swift */; };
+		D69DBD8E1B286C4900FC3B11 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69DBD8D1B286C4900FC3B11 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B7D0EBBBD56B4BE3BEB9D4CD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D39DC2FCB0767D6D99B0A086 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D68FFCED1B287E69002E9AD5 /* elderly.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = elderly.jpg; sourceTree = "<group>"; };
+		D68FFCEF1B287F41002E9AD5 /* elderly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elderly.png; sourceTree = "<group>"; };
 		D69612EE1B282EF20083022B /* ubiss-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ubiss-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D69612F21B282EF20083022B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D69612F31B282EF20083022B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,6 +46,8 @@
 		D69613061B282EF20083022B /* ubiss-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ubiss-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D696130B1B282EF20083022B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D696130C1B282EF20083022B /* ubiss_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ubiss_iosTests.swift; sourceTree = "<group>"; };
+		D69DBD8D1B286C4900FC3B11 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		F0E00B0E7DAF8FD804405295 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0A3725EBBF21E5AA044DC3B /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,12 +69,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25A33E55C316A3AC64977109 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0E00B0E7DAF8FD804405295 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CA3CD9D7913A42DB8F9C78B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7D0EBBBD56B4BE3BEB9D4CD /* Pods.debug.xcconfig */,
+				D39DC2FCB0767D6D99B0A086 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D69612E51B282EF20083022B = {
 			isa = PBXGroup;
 			children = (
 				D69612F01B282EF20083022B /* ubiss-ios */,
 				D69613091B282EF20083022B /* ubiss-iosTests */,
 				D69612EF1B282EF20083022B /* Products */,
+				9CA3CD9D7913A42DB8F9C78B /* Pods */,
+				25A33E55C316A3AC64977109 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +109,9 @@
 		D69612F01B282EF20083022B /* ubiss-ios */ = {
 			isa = PBXGroup;
 			children = (
+				D68FFCED1B287E69002E9AD5 /* elderly.jpg */,
+				D68FFCEF1B287F41002E9AD5 /* elderly.png */,
+				D69DBD8D1B286C4900FC3B11 /* Utils.swift */,
 				D69612F31B282EF20083022B /* AppDelegate.swift */,
 				D69612F81B282EF20083022B /* ViewController.swift */,
 				D69612FA1B282EF20083022B /* Main.storyboard */,
@@ -122,9 +155,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D69613101B282EF20083022B /* Build configuration list for PBXNativeTarget "ubiss-ios" */;
 			buildPhases = (
+				AB51832DCAF12ADF02844C0B /* Check Pods Manifest.lock */,
 				D69612EA1B282EF20083022B /* Sources */,
 				D69612EB1B282EF20083022B /* Frameworks */,
 				D69612EC1B282EF20083022B /* Resources */,
+				AABD867132536DF4A73F58FF /* Embed Pods Frameworks */,
+				7F11D99656E0509947FEA70B /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -198,6 +234,8 @@
 				D69612FC1B282EF20083022B /* Main.storyboard in Resources */,
 				D69613011B282EF20083022B /* LaunchScreen.xib in Resources */,
 				D69612FE1B282EF20083022B /* Images.xcassets in Resources */,
+				D68FFCF01B287F41002E9AD5 /* elderly.png in Resources */,
+				D68FFCEE1B287E6A002E9AD5 /* elderly.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +248,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7F11D99656E0509947FEA70B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AABD867132536DF4A73F58FF /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB51832DCAF12ADF02844C0B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D69612EA1B282EF20083022B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -218,6 +304,7 @@
 				D69612F91B282EF20083022B /* ViewController.swift in Sources */,
 				D69612F71B282EF20083022B /* ubiss_ios.xcdatamodeld in Sources */,
 				D69612F41B282EF20083022B /* AppDelegate.swift in Sources */,
+				D69DBD8E1B286C4900FC3B11 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +431,7 @@
 		};
 		D69613111B282EF20083022B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7D0EBBBD56B4BE3BEB9D4CD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "ubiss-ios/Info.plist";
@@ -354,6 +442,7 @@
 		};
 		D69613121B282EF20083022B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D39DC2FCB0767D6D99B0A086 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "ubiss-ios/Info.plist";
@@ -415,6 +504,7 @@
 				D69613121B282EF20083022B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D69613131B282EF20083022B /* Build configuration list for PBXNativeTarget "ubiss-iosTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +513,7 @@
 				D69613151B282EF20083022B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
