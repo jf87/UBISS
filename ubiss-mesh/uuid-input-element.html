@@ -1,0 +1,20 @@
+<polymer-element name="uuid-input-element">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                top: 25;
+                left: 25;
+                width: 100px;
+            }
+        </style>
+        <div>
+            <input is="core-input" placeholder="enter your user id here, please" value="{{uuid}}" committedValue="{{committedUuid}}">
+
+            <p>uuid: {{uuid}}, committedUuid: {{committedUuid}}</p>
+        </div>
+    </template>
+<script>
+    Polymer({});
+</script>
+</polymer-element>
