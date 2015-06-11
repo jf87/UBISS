@@ -57,9 +57,7 @@ class Volunteers(Resource):
             if not newid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
-            return create_error_response(400, "Wrong request format",
+           return create_error_response(400, "Wrong request format",
                                              "Be sure you include volunteer ID and nickname",
                                              "Volunteers")
         url = api.url_for(Volunteer, volunteerid=uuid)
@@ -89,8 +87,6 @@ class VolunteerStatus(Resource):
             if not vid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
             return create_error_response(400, "Wrong request format",
                                              "Be sure you include volunteer ID and status",
                                              "Volunteer")
@@ -109,8 +105,6 @@ class VolunteerLocation(Resource):
             if not vid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
             return create_error_response(400, "Wrong request format",
                                              "Be sure you include volunteer ID, longitude and latitude",
                                              "Volunteer")
@@ -129,8 +123,6 @@ class VolunteerScore(Resource):
             if not vid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
             return create_error_response(400, "Wrong request format",
                                              "Be sure you include volunteer ID and the new Score",
                                              "Volunteer")
@@ -154,12 +146,10 @@ class Citizens(Resource):
             uuid = data['citizen_id']
             nickname = data['name']
             address = data['address']
-            newid = g.db.create_citizen(uuid, nickname)
+            newid = g.db.create_citizen(uuid, nickname, address)
             if not newid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
             return create_error_response(400, "Wrong request format",
                                              "Be sure you include citizen ID, name and Address",
                                              "Citizens")
@@ -177,9 +167,15 @@ class Citizen(Resource):
         
         return Response (ujson.dumps(citizen), 200, mimetype=MIME_TYPE)
 
+
 class HelpRequests(Resource):
     def get(self):
-        volunteerid = request.get('volunteerid', '-1')
+        volunteerid = request.args.get('volunteer_id', '-1')
+        if volunteerid is None:
+            return create_error_response(404, "Can't get requests",
+                                         "There is no volunteerid parameter",
+                                         "HelpRequest")
+
         requests = g.db.get_help_requests(volunteerid)
         return Response (ujson.dumps(requests), 200, mimetype=MIME_TYPE)
 
@@ -191,13 +187,11 @@ class HelpRequests(Resource):
         try:
             volunteer_id = data['volunteer_id']
             citizen_id = data['citizen_id']
-            request = data['request']
-            newid = g.db.create_help_request(volunteer_id, citizen_id, request)
+            helpRequest = data['request']
+            newid = g.db.create_help_request(volunteer_id, citizen_id, helpRequest)
             if not newid:
                 abort(500)
         except:
-            #This is launched if either title or body does not exist or if 
-            # the template.data array does not exist.
             return create_error_response(400, "Wrong request format",
                                              "Be sure you include volunteer_id, citizen ID and request",
                                              "HelpRequests")
@@ -208,7 +202,7 @@ class HelpRequests(Resource):
 
 class HelpRequest(Resource):
     def get(self, requestid):
-        helpRequest = g.db.get_citizen(requestid)
+        helpRequest = g.db.get_help_request(requestid)
         if not helpRequest:
             return create_error_response(404, "Unknown request",
                                          "There is no request with id %s" % requestid,
@@ -248,13 +242,15 @@ api.add_resource(VolunteerLocation,'/volunteers/<volunteerid>/location',
 api.add_resource(VolunteerScore,'/volunteers/<volunteerid>/score',
                  endpoint='score')
 
-api.add_resource(Citizens,'/citizens/', endpoint='citizens')
+api.add_resource(Citizens,'/citizens/',
+                 endpoint='citizens')
 
 api.add_resource(Citizen,'/citizens/<citizenid>',
                  endpoint='citizen')
 
 api.add_resource(HelpRequests,'/requests/',
                  endpoint='requests')
+
 api.add_resource(HelpRequest,'/requests/<requestid>',
                  endpoint='request')
 

@@ -1,3 +1,4 @@
+from datetime import datetime
 import sqlite3
 from flask import g
 
@@ -49,9 +50,9 @@ class CitizenDatabase(object):
             #Provide support for foreign keys
             cur.execute(keys_on)
             #Execute the statement
-            cur.execute(stmnt, args)
+            cur.execute(stmt, args)
             #Extract the id of the added message
-            lid = cur.lastrowid 
+            lid = cur.lastrowid
             rc = cur.rowcount
             cur.close()
             #Return the id 
@@ -152,10 +153,10 @@ class CitizenDatabase(object):
 
 
     def create_citizen(self, citizen_id, name, address):
-        stmnt = 'INSERT INTO citizens (citizen_id, name, address)\
-                 VALUES(?,?,?)'
+        stmnt = 'INSERT INTO citizens(citizen_id, name, address) \
+                 VALUES (?,?,?)'
         pvalue = (citizen_id, name, address)
-        lid,rc = self.execute_db(stmnt, pvalue)
+        lid, rc = self.execute_db(stmnt, pvalue)
         return lid
 
     def get_citizens(self):
@@ -168,17 +169,18 @@ class CitizenDatabase(object):
         row = self.query_db(query, (citizenid,))
         return row
 
-    def create_help_request(self, volunteer_id, citizen_id, request):
-        stmnt = 'INSERT INTO helpRequests (volunteer_id, citizen_id, request, status)\
-                 VALUES(?,?,?,?)'
-        lid, rc = self.execute_db(stmnt, (volunteer_id, citizen_id, request, 0))
+    def create_help_request(self, volunteer_id, citizen_id, helpRequest):
+        stmnt = 'INSERT INTO requests (volunteer_id, citizen_id, request, status) \
+                 VALUES (?,?,?,?)'
+        pvalue = (volunteer_id, citizen_id, helpRequest, 0)
+        lid, rc = self.execute_db(stmnt, pvalue)
         return lid
     
     def get_help_requests(self, volunteerid):
         query = 'SELECT * FROM requests WHERE volunteer_id=? \
                  ORDER BY rtimestamp DESC \
                  LIMIT 10'
-        rows = self.query_db(query, (volunteerid))
+        rows = self.query_db(query, (volunteerid,))
         return rows
 
     def get_help_request(self, requestid):
@@ -187,9 +189,9 @@ class CitizenDatabase(object):
         return rows
 
     def modify_help_request(self, request_id, answer):
-        stmnt = 'UPDATE requests SET answer=? \
+        stmnt = 'UPDATE requests SET answer=?, answered_at=?, status=1 \
                  WHERE request_id = ?'
-        pvalue = (answer, request_id)
+        pvalue = (answer, datetime.now(), request_id)
         lid, rc = self.execute_db(stmnt, pvalue)
         if rc < 1:
             return None
