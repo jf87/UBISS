@@ -16,7 +16,7 @@ class Volunteers(Resource):
             "nickname":"Mikko",
             "status": "ready",
             "created_at": "2014-11-11T08:40:51.620Z",
-            "last_position": {"longitude": 65, "latitude": 24.5}
+            "last_position": {"longitude": 65.030366, "latitude": 25.414801}
         }]
         return volunteers
 
