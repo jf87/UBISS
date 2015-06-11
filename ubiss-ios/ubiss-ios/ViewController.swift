@@ -22,13 +22,19 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     var startLocation: CLLocation!
     var distanceBetween : CLLocationDistance = 0
     var uuid : String = ""
+    let REST : String = "http://127.0.0.1:5000"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         uuid = NSUUID().UUIDString
+//        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+//            // do some task
+//            dispatch_async(dispatch_get_main_queue()) {
+//                // update some UI
+//            }
+//        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), backgroundGETs)
 
-
-        // Do any additional setup after loading the view, typically from a nib.
         
         textFieldName!.delegate = self
         textFieldTel!.delegate = self
@@ -48,6 +54,28 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         // Dispose of any resources that can be recreated.
     }
     
+    func backgroundGETs() {
+        NSThread.sleepForTimeInterval(5)
+        println("this is background task")
+        var request = HTTPTask()
+        request.GET("http://httpbin.org/get", parameters: nil, completionHandler: {(response: HTTPResponse) in
+            if let err = response.error {
+                println("error: \(err.localizedDescription)")
+                return //also notify app of failure as needed
+            }
+            if let data = response.responseObject as? NSData {
+                let str = NSString(data: data, encoding: NSUTF8StringEncoding)
+                println("response: \(str)") //prints the HTML of the page
+                dispatch_async(dispatch_get_main_queue(),{
+                    //do UI changes to tableview
+                })
+            }
+        })
+        
+        //call again
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), backgroundGETs)
+    }
+    
     
     func locationManager(manager: CLLocationManager!,
         didUpdateLocations locations: [AnyObject]!)
@@ -60,7 +88,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             startLocation = latestLocation as! CLLocation
         }
         
-        if  (latestLocation.distanceFromLocation(startLocation) > 1) {
+        if  (latestLocation.distanceFromLocation(startLocation) > 2) {
             distanceBetween = latestLocation.distanceFromLocation(startLocation)
             startLocation = latestLocation as! CLLocation
             println("volunteer moved: \(distanceBetween)")
@@ -78,10 +106,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
                     println("description: \(response.description)")
                 }
             })
-            
-            
         }
-        
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -122,6 +147,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
                 println("description: \(response.description)")
             }
         })
+        
     }
     
     @IBAction func buttonDeactivated(sender: UIButton) {

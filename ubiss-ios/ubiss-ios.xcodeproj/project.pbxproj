@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0A3725EBBF21E5AA044DC3B /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0E00B0E7DAF8FD804405295 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		D61E3D4B1B29BDA4005D71A8 /* MessagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61E3D4A1B29BDA4005D71A8 /* MessagesTableViewController.swift */; };
 		D68FFCF01B287F41002E9AD5 /* elderly.png in Resources */ = {isa = PBXBuildFile; fileRef = D68FFCEF1B287F41002E9AD5 /* elderly.png */; };
 		D68FFCF21B28D23A002E9AD5 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D68FFCF11B28D23A002E9AD5 /* TableViewController.swift */; };
 		D69612F41B282EF20083022B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69612F31B282EF20083022B /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		B7D0EBBBD56B4BE3BEB9D4CD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D39DC2FCB0767D6D99B0A086 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D61E3D4A1B29BDA4005D71A8 /* MessagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesTableViewController.swift; sourceTree = "<group>"; };
 		D68FFCEF1B287F41002E9AD5 /* elderly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = elderly.png; sourceTree = "<group>"; };
 		D68FFCF11B28D23A002E9AD5 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D69612EE1B282EF20083022B /* ubiss-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ubiss-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 				D69612F31B282EF20083022B /* AppDelegate.swift */,
 				D69612F81B282EF20083022B /* ViewController.swift */,
 				D68FFCF11B28D23A002E9AD5 /* TableViewController.swift */,
+				D61E3D4A1B29BDA4005D71A8 /* MessagesTableViewController.swift */,
 				D69612FA1B282EF20083022B /* Main.storyboard */,
 				D69612FD1B282EF20083022B /* Images.xcassets */,
 				D69612FF1B282EF20083022B /* LaunchScreen.xib */,
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D69612F91B282EF20083022B /* ViewController.swift in Sources */,
+				D61E3D4B1B29BDA4005D71A8 /* MessagesTableViewController.swift in Sources */,
 				D69612F71B282EF20083022B /* ubiss_ios.xcdatamodeld in Sources */,
 				D69612F41B282EF20083022B /* AppDelegate.swift in Sources */,
 				D68FFCF21B28D23A002E9AD5 /* TableViewController.swift in Sources */,

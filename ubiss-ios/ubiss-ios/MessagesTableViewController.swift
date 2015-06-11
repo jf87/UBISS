@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 
 
-class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet var tableView: UITableView!
-    
-    
-    let volunteers = ["Henri", "Mohamed", "Jonathan"]
-    let points = [140, 90, 50]
+class MessagesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    //@IBOutlet var tableView: UITableView!
 
-    let textCellIdentifier = "ScoreCell"
+    @IBOutlet var messTableView: UITableView!
+    let messages = ["Hi! Could you bring me a box of milk from the grocery store at the corner?", "Hejsa!", "Do you want to come by for a coffee later today?"]
+
+    let messageCellIdentifier = "MessageCell"
     
     override func viewDidLoad() {
         println("table view did load")
@@ -25,17 +24,12 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.edgesForExtendedLayout=UIRectEdge.None
         self.extendedLayoutIncludesOpaqueBars=false
         self.automaticallyAdjustsScrollViewInsets=false
-        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
-        // Do any additional setup after loading the view, typically from a nib.
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        //        //move tableview under statusbar hack
-        //        self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
-        
+        //move tableview under statusbar hack
+        self.messTableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0)
+        messTableView.delegate = self
+        messTableView.dataSource = self
     }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -46,14 +40,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return volunteers.count
+        return messages.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(messageCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         
         let row = indexPath.row
-        cell.textLabel?.text = String(row+1)+" "+volunteers[row] + " " + String(points[row]) + " points"
+        cell.textLabel?.text = String(row+1)+" "+messages[row]
         
         return cell
     }
@@ -62,7 +56,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let row = indexPath.row
-        println(volunteers[row])
+        println(messages[row])
         if indexPath == 0 {
             
             
