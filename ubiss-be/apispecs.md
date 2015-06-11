@@ -19,7 +19,12 @@
 + POST
     Creates a new volunteer
     - Request:
-    `{'volunteer_id': '12345678-1234-5678-1234-567812345678'}`
+    ```
+    {
+        'volunteer_id': '12345678-1234-5678-1234-567812345678',
+        'nickname': 'Mikko'
+    }
+    ```
    
     - Response:
     ```
@@ -28,7 +33,7 @@
     ```
 
 
-### /volunteers/<volunteer_id>
+### /volunteers/(volunteer_id)
 + GET
     Returns volunteer's data
 
@@ -43,12 +48,14 @@
     }
     ```
 
-### /volunteers/<volunteer_id>/status
+### /volunteers/(volunteer_id)/status
 
 + POST
     Updates the status of the volunteer
     - Request:
-    `{'status': 'ready'}`
+    ```
+    {'status': 'ready'}
+    ```
    
     - Response:
     ```
@@ -56,7 +63,7 @@
     Location: /volunteers/12345678-1234-5678-1234-567812345678
     ```
 
-### /volunteers/<volunteer_id>/location
+### /volunteers/(volunteer_id)/location
 
 + POST
     Updates the location of the volunteer
@@ -70,7 +77,7 @@
     ```
 
 
-### /volunteers/<volunteer_id>/score
+### /volunteers/(volunteer_id)/score
 
 + POST
     Sets the score to the given amount
@@ -95,9 +102,25 @@
         "created_at": "2014-11-11T08:40:51.620Z"
     }]
     ```
++ POST
+    Creates a new citizen
+
+    - Request:
+    ```
+    {
+        "citizen_id": "12345678-1234-5678-1234-567812345678",
+        "address": "Yliopistokatu 16"
+    }
+    ```
+
+    - Response:
+    ```
+    Status: 201
+    Location: /volunteers/12345678-1234-5678-1234-567812345678
+    ```
 
 
-### /citizens/<citizen_id>
+### /citizens/(citizen_id)
 + GET
     Returns a citizen data and their addresses
 
@@ -129,7 +152,7 @@
     }]
     ```
 
-### /requests/<request_id>
+### /requests/(request_id)
 + GET
     Returns request's details.
 
@@ -148,7 +171,7 @@
 ## Sample JSON objects
 
 ### Volunteers
-[ <volunteer1>, <volunteer2> ... ]
+[ (volunteer1), (volunteer2) ... ]
 
 ### Volunteer
 {
@@ -161,7 +184,7 @@
 }
 
 ### Citizens
-[ <citizen1>, <citizen2> ... ]
+[ (citizen1), (citizen2) ... ]
 
 ### Citizen
 {
@@ -171,7 +194,7 @@
 }
 
 ### Help Requests
-[ <request1>, <request2> ...]
+[ (request1), (request2) ...]
 
 ### Help Request
 {
