@@ -1,29 +1,48 @@
 import ujson
-
+import db
 from flask import Flask, request, Response, g, jsonify
 from flask.ext.restful import Resource, Api, abort
 from werkzeug.exceptions import NotFound,  UnsupportedMediaType
 
+DEFAULT_DB_PATH = 'db/citizens.db'
+MIME_TYPE = "application/json"
+
 app = Flask(__name__)
 app.debug = True
+app.config.update({'DATABASE':db.CitizenDatabase(DEFAULT_DB_PATH)})
 api = Api(app)
 
+def create_error_response(status_code, title, message, resource_type=None):
+    response = jsonify(title=title, message=message, resource_type=resource_type)
+    response.status_code = status_code
+    return response
+
+@app.errorhandler(404)
+def resource_not_found(error):
+    return create_error_response(404, "Resource not found", "This resource url does not exit")
+
+@app.errorhandler(500)
+def unknown_error(error):
+    return create_error_response(500, "Error", "The system has failed. Please, contact the administrator")
+
+@app.before_request
+def set_database():
+    '''Stores an instance of the database API before each request in the flas.g
+    variable accessible only from the application context'''
+    g.db = app.config['DATABASE']
+
+## Added for CORS
 @app.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Origin', '*')
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
   return response
-  
+
 class Volunteers(Resource):
     def get(self):
-        volunteers = [{
-            "volunteer_id": "12345678-1234-5678-1234-567812345678",
-            "nickname":"Mikko",
-            "status": "ready",
-            "created_at": "2014-11-11T08:40:51.620Z",
-            "last_position": {"longitude": 65.030366, "latitude": 25.414801}
-        }]
+        print "Get /volunteers"
+        volunteers = g.db.get_volunteers()
         return volunteers
 
     def post(self):
@@ -33,24 +52,31 @@ class Volunteers(Resource):
 
         try:
             uuid = data['volunteer_id']
+            nickname = data['nickname']
+            #Create the new message and build the response code'
+            newid = g.db.create_volunteer(uuid, nickname)
+            if not newid:
+                abort(500)
         except:
-            abort (400)
-
-        #uuid = "12345678-1234-5678-1234-567812345678"
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer ID and nickname",
+                                             "Volunteers")
         url = api.url_for(Volunteer, volunteerid=uuid)
 
         return Response(status=201, headers={'Location':url})
 
 class Volunteer(Resource):
     def get(self, volunteerid):
-        volunteer = {
-            "volunteer_id": volunteerid,
-            "nickname":"Mikko",
-            "status": "ready",
-            "created_at": "2014-11-11T08:40:51.620Z",
-            "last_position": {"longitude": 65, "latitude": 24.5}
-            }
-        return volunteer
+        volunteer_db = g.db.get_volunteer(volunteerid)
+        if not volunteer_db:
+            return create_error_response(404, "Unknown volunteer",
+                                         "There is no volunteer with id %s" % volunteerid,
+                                         "Volunteer")
+        
+        return Response (ujson.dumps(volunteer_db), 200, mimetype=MIME_TYPE)
+
 
 class VolunteerStatus(Resource):
     def post(self, volunteerid):
@@ -60,11 +86,16 @@ class VolunteerStatus(Resource):
 
         try:
             status = data['status']
+            vid = g.db.modify_volunteer_status(volunteerid, status)
+            if not vid:
+                abort(500)
         except:
-            abort (400)
-
-        uuid = "12345678-1234-5678-1234-567812345678"
-        url = api.url_for(Volunteer, volunteerid=uuid)
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer ID and status",
+                                             "Volunteer")
+        url = api.url_for(Volunteer, volunteerid=volunteerid)
 
         return Response(status=201, headers={'Location':url})
 
@@ -75,11 +106,17 @@ class VolunteerLocation(Resource):
             raise UnsupportedMediaType()
 
         try:
-            location = {"longitude": data['longitude'], "latitude": data['latitude']}
+            print "received data %s" % data['latitude']
+            print "received %s, %s " % (data['longitude'], data['latitude'])
+            vid = g.db.modify_volunteer_location(volunteerid, data['longitude'], data['latitude'])
+            if not vid:
+                abort(500)
         except:
-            abort (400)
-
-        #uuid = "12345678-1234-5678-1234-567812345678"
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer ID, longitude and latitude",
+                                             "Volunteer")
         url = api.url_for(Volunteer, volunteerid=volunteerid)
 
         return Response(status=201, headers={'Location':url})
