@@ -1,4 +1,3 @@
-#import db
 import ujson
 
 from flask import Flask, request, Response, g, jsonify
@@ -9,6 +8,13 @@ app = Flask(__name__)
 app.debug = True
 api = Api(app)
 
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
+  
 class Volunteers(Resource):
     def get(self):
         volunteers = [{
