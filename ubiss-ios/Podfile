@@ -14,4 +14,4 @@ platform :ios, '8.0'
 use_frameworks!
 
 pod 'SwiftHTTP', '~> 0.9.4'
-
+pod 'Alamofire', '~> 1.2'

@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import SwiftHTTP
+import Alamofire
 
 class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate {
     
@@ -22,7 +23,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
     var startLocation: CLLocation!
     var distanceBetween : CLLocationDistance = 0
     var uuid : String = ""
-    let REST : String = "http://127.0.0.1:5000"
+    let REST : String = "http://130.226.142.195/ubiss"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         NSThread.sleepForTimeInterval(5)
         println("this is background task")
         var request = HTTPTask()
-        request.GET("http://httpbin.org/get", parameters: nil, completionHandler: {(response: HTTPResponse) in
+        request.GET(self.REST+"/volunteers", parameters: nil, completionHandler: {(response: HTTPResponse) in
             if let err = response.error {
                 println("error: \(err.localizedDescription)")
                 return //also notify app of failure as needed
@@ -88,24 +89,22 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
             startLocation = latestLocation as! CLLocation
         }
         
-        if  (latestLocation.distanceFromLocation(startLocation) > 2) {
+        if  (latestLocation.distanceFromLocation(startLocation) > 2) && self.buttonDeactivate.enabled{
             distanceBetween = latestLocation.distanceFromLocation(startLocation)
             startLocation = latestLocation as! CLLocation
             println("volunteer moved: \(distanceBetween)")
-            
-            var request = HTTPTask()
-            //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-            let params: Dictionary<String,AnyObject> = ["uuid": uuid, "lo": latestLocation.coordinate.longitude, "la": latestLocation.coordinate.latitude]
-            request.POST("http://httpbin.org/post", parameters: params, completionHandler: {(response: HTTPResponse) in
-                if let err = response.error {
-                    println("error: \(err.localizedDescription)")
-                    return //also notify app of failure as needed
-                }
-                if let res: AnyObject = response.responseObject {
-                    println("response: \(res)")
-                    println("description: \(response.description)")
-                }
-            })
+            let parameters = [
+                "longitude": latestLocation.coordinate.longitude,
+                "latitude": latestLocation.coordinate.latitude
+            ]
+            Alamofire.request(.POST, self.REST+"/volunteers/"+uuid+"/location", parameters: parameters, encoding: .JSON)
+                .response { (request, response, data, error) in
+                    println("AlamofireLoc")
+                    println(request)
+                    println(response)
+                    println(error)
+            }
+
         }
     }
     
@@ -129,24 +128,22 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         
         println("activated")
         self.buttonActivate.enabled = false
-        self.buttonDeactivate.enabled = true
         
         let name : String = self.textFieldName.text
         let tel : String = self.textFieldTel.text
-        
-        var request = HTTPTask()
-        //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
-        let params: Dictionary<String,AnyObject> = ["uuid": uuid, "name": name, "tel": tel]
-        request.POST("http://httpbin.org/post", parameters: params, completionHandler: {(response: HTTPResponse) in
-            if let err = response.error {
-                println("error: \(err.localizedDescription)")
-                return //also notify app of failure as needed
-            }
-            if let res: AnyObject = response.responseObject {
-                println("response: \(res)")
-                println("description: \(response.description)")
-            }
-        })
+        let parameters = [
+            "volunteer_id": uuid,
+            "nickname": name
+        ]
+        Alamofire.request(.POST, REST+"/volunteers", parameters: parameters, encoding: .JSON)
+            .response { (request, response, data, error) in
+                println("Alamofire")
+                println(request)
+                println(response)
+                println(error)
+        }
+        self.buttonDeactivate.enabled = true
+
         
     }
     
@@ -154,7 +151,6 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
         
         println("deactivated")
         self.buttonDeactivate.enabled = false
-        self.buttonActivate.enabled = true
         var request = HTTPTask()
         //we have to add the explicit type, else the wrong type is inferred. See the vluxe.io article for more info.
         let params: Dictionary<String,AnyObject> = ["status": 0]
@@ -168,8 +164,7 @@ class ViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDe
                 println("description: \(response.description)")
             }
         })
-
-        
+        self.buttonActivate.enabled = true
     }
 
 
