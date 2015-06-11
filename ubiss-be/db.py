@@ -9,6 +9,8 @@ def make_dicts(cursor, row):
     return dict((cursor.description[idx][0], value)
                 for idx, value in enumerate(row))
 
+
+
 class CitizenDatabase(object):
     def __init__(self, db_path):
         '''
@@ -20,6 +22,40 @@ class CitizenDatabase(object):
             self.db_path = db_path
         else:
             self.db_path = DEFAULT_DB_PATH
+
+    def query_db(self, query, args=(), one=False):
+        keys_on = 'PRAGMA foreign_keys = ON'
+        con = sqlite3.connect(self.db_path)
+        with con:
+            #Cursor and row initialization
+            con.row_factory = make_dicts
+            cur = con.cursor()
+            #Provide support for foreign keys
+            cur.execute(keys_on)
+            #Execute main SQL Statement        
+            cur.execute(query, args)
+            rv = cur.fetchall()
+            cur.close()
+            return (rv[0] if rv else None) if one else rv
+
+    def execute_db(self, stmt, args=()):
+        keys_on = 'PRAGMA foreign_keys = ON'
+        #Connects  to the database. 
+        con = sqlite3.connect(self.db_path)
+        with con:
+            #Cursor and row initialization
+            con.row_factory = make_dicts
+            cur = con.cursor()
+            #Provide support for foreign keys
+            cur.execute(keys_on)
+            #Execute the statement
+            cur.execute(stmnt, args)
+            #Extract the id of the added message
+            lid = cur.lastrowid 
+            rc = cur.rowcount
+            cur.close()
+            #Return the id 
+            return (lid, rc)
 
 
     def create_tables_from_schema(self, schema=None):
@@ -44,122 +80,118 @@ class CitizenDatabase(object):
                      ORDER BY ptimestamp DESC \
                      LIMIT 1'
 
-        #Connects to the database.
-        con = sqlite3.connect(self.db_path)
-        with con:
-            #Cursor and row initialization
-            con.row_factory = make_dicts
-            cur = con.cursor()
-            #Provide support for foreign keys
-            cur.execute(keys_on)
-            #Execute main SQL Statement        
-            cur.execute(query)
-            #Get results
-            rows = cur.fetchall()
-            for idx, r in enumerate(rows):
-                cur.execute(query_loc, (r['volunteer_id'],))
-                r_loc = cur.fetchone()
-                if r_loc is not None:
-                    rows[idx]['longitude'] = r_loc['longitude']
-                    rows[idx]['latitude'] = r_loc['latitude']
-                else:
-                    rows[idx]['longitude'] = None
-                    rows[idx]['latitude'] = None
+        rows = self.query_db(query)
+        for idx, r in enumerate(rows):
+            r_loc = self.query_db(query_loc, (r['volunteer_id'],), one=True)
+            if r_loc:
+                rows[idx]['longitude'] = r_loc['longitude']
+                rows[idx]['latitude'] = r_loc['latitude']
+            else:
+                rows[idx]['longitude'] = None
+                rows[idx]['latitude'] = None
 
-            return rows
+        return rows
 
     def get_volunteer(self, volunteerid):
-        keys_on = 'PRAGMA foreign_keys = ON'
         query = 'SELECT * FROM volunteers WHERE volunteer_id=?'
         query_loc = 'SELECT * FROM volunteers_postions \
                      WHERE volunteer_id=?\
                      ORDER BY ptimestamp DESC \
                      LIMIT 1'
 
-        #Connects to the database.
-        con = sqlite3.connect(self.db_path)
-        with con:
-            #Cursor and row initialization
-            con.row_factory = make_dicts
-            cur = con.cursor()
-            #Provide support for foreign keys
-            cur.execute(keys_on)
-            #Execute main SQL Statement        
-            pvalue = (volunteerid,)
-            cur.execute(query, pvalue)
-            #Get results
-            row = cur.fetchone()
-            
-            cur.execute(query_loc, pvalue)
-            row_loc = cur.fetchone()
-            if row_loc is not None:
-                row['longitude'] = row_loc['longitude']
-                row['latitude'] = row_loc['latitude']
-            else:
-                row['longitude'] = None
-                row['latitude'] = None
-            
-            return row
+        pvalue = (volunteerid,)
+        row = self.query_db(query, pvalue, one=True)
+        row_loc = self.query_db(query_loc, pvalue, one=True)
+        if row_loc is not None:
+            row['longitude'] = row_loc['longitude']
+            row['latitude'] = row_loc['latitude']
+        else:
+            row['longitude'] = None
+            row['latitude'] = None
+        
+        return row
 
     def create_volunteer(self, volunteer_id, nickname):
         keys_on = 'PRAGMA foreign_keys = ON'
-        #SQL Statement for inserting the data
         stmnt = 'INSERT INTO volunteers (volunteer_id, nickname, status)\
                  VALUES(?,?,?)'
-        #Connects  to the database. 
-        con = sqlite3.connect(self.db_path)
-        with con:
-            #Cursor and row initialization
-            con.row_factory = make_dicts
-            cur = con.cursor()
-            #Provide support for foreign keys
-            cur.execute(keys_on)
-            #Generate the values for SQL statement
-            pvalue = (volunteer_id, nickname, 'offline')
-            #Execute the statement
-            cur.execute(stmnt, pvalue)
-            #Extract the id of the added message
-            lid = cur.lastrowid 
-            #Return the id in 
-            return lid
+        pvalue = (volunteer_id, nickname, 'offline')
+        lid,rc = self.execute_db(stmnt, pvalue)
+        return lid
 
     def modify_volunteer_status(self, volunteer_id, status):
-        #Create the SQL statment
-        keys_on = 'PRAGMA foreign_keys = ON'
         stmnt = 'UPDATE volunteers SET status=? \
                  WHERE volunteer_id = ?'
-        #Connects  to the database. 
-        con = sqlite3.connect(self.db_path)
-        with con:
-            #Cursor and row initialization
-            con.row_factory = make_dicts
-            cur = con.cursor()
-            #Provide support for foreign keys
-            cur.execute(keys_on)        
-            #Execute main SQL Statement
-            pvalue = (status, volunteer_id)
-            cur.execute(stmnt, pvalue)
-            if cur.rowcount < 1:
-                return None
-            return volunteer_id
+        pvalue = (status, volunteer_id)
+        lid, rc = self.execute_db(stmnt, pvalue)
+        if rc < 1:
+            return None
+        return volunteer_id
 
 
     def modify_volunteer_location(self, volunteer_id, lon, lat):
-        #Create the SQL statment
-        keys_on = 'PRAGMA foreign_keys = ON'
         stmnt = 'INSERT INTO volunteers_postions (volunteer_id, longitude, latitude) \
                  VALUES (?, ?, ?)'
-        #Connects  to the database. 
-        con = sqlite3.connect(self.db_path)
-        with con:
-            #Cursor and row initialization
-            con.row_factory = make_dicts
-            cur = con.cursor()
-            #Provide support for foreign keys
-            cur.execute(keys_on)        
-            #Execute main SQL Statement
-            pvalue = (volunteer_id, lon, lat)
-            cur.execute(stmnt, pvalue)
-            if cur.rowcount < 1:
-                return None
-            return volunteer_id
+
+        pvalue = (volunteer_id, lon, lat)
+        lid,rc = self.execute_db(stmnt, pvalue)
+        if rc < 1:
+            return None
+        return volunteer_id
+
+
+    def modify_volunteer_score(self, volunteer_id, score):
+        stmnt = 'INSERT INTO volunteers_postions (volunteer_id, score) \
+                 VALUES (?, ?)'
+
+        pvalue = (volunteer_id, score)
+        lid,rc = self.execute_db(stmnt, pvalue)
+        if rc < 1:
+            return None
+        return volunteer_id
+
+
+    def create_citizen(self, citizen_id, name, address):
+        stmnt = 'INSERT INTO citizens (citizen_id, name, address)\
+                 VALUES(?,?,?)'
+        pvalue = (citizen_id, name, address)
+        lid,rc = self.execute_db(stmnt, pvalue)
+        return lid
+
+    def get_citizens(self):
+        query = 'SELECT * FROM citizens'
+        rows = self.query_db(query)
+        return rows
+
+    def get_citizen(self, citizenid):
+        query = 'SELECT * FROM citizens WHERE citizen_id=?'
+        row = self.query_db(query, (citizenid,))
+        return row
+
+    def create_help_request(self, volunteer_id, citizen_id, request):
+        stmnt = 'INSERT INTO helpRequests (volunteer_id, citizen_id, request, status)\
+                 VALUES(?,?,?,?)'
+        lid, rc = self.execute_db(stmnt, (volunteer_id, citizen_id, request, 0))
+        return lid
+    
+    def get_help_requests(self, volunteerid):
+        query = 'SELECT * FROM requests WHERE volunteer_id=? \
+                 ORDER BY rtimestamp DESC \
+                 LIMIT 10'
+        rows = self.query_db(query, (volunteerid))
+        return rows
+
+    def get_help_request(self, requestid):
+        query = 'SELECT * FROM requests WHERE request_id=?'
+        rows = self.query_db(query, (requestid, ))
+        return rows
+
+    def modify_help_request(self, request_id, answer):
+        stmnt = 'UPDATE requests SET answer=? \
+                 WHERE request_id = ?'
+        pvalue = (answer, request_id)
+        lid, rc = self.execute_db(stmnt, pvalue)
+        if rc < 1:
+            return None
+        return request_id
+

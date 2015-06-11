@@ -41,9 +41,8 @@ def after_request(response):
 
 class Volunteers(Resource):
     def get(self):
-        print "Get /volunteers"
         volunteers = g.db.get_volunteers()
-        return volunteers
+        return Response (ujson.dumps(volunteers), 200, mimetype=MIME_TYPE)
 
     def post(self):
         data = request.get_json()
@@ -106,8 +105,6 @@ class VolunteerLocation(Resource):
             raise UnsupportedMediaType()
 
         try:
-            print "received data %s" % data['latitude']
-            print "received %s, %s " % (data['longitude'], data['latitude'])
             vid = g.db.modify_volunteer_location(volunteerid, data['longitude'], data['latitude'])
             if not vid:
                 abort(500)
@@ -121,15 +118,32 @@ class VolunteerLocation(Resource):
 
         return Response(status=201, headers={'Location':url})
 
+class VolunteerScore(Resource):
+    def post(self, volunteerid):
+        data = request.get_json()
+        if not data:
+            raise UnsupportedMediaType()
+
+        try:
+            vid = g.db.modify_volunteer_location(volunteerid, data['score'])
+            if not vid:
+                abort(500)
+        except:
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer ID and the new Score",
+                                             "Volunteer")
+        url = api.url_for(Volunteer, volunteerid=volunteerid)
+
+        return Response(status=201, headers={'Location':url})
+
+
 
 class Citizens(Resource):
     def get(self):
-        citizens = [{
-            "citizen_id": "12345678-1234-5678-1234-567812345678",
-            "address": "Yliopistokatu 16",
-            "created_at": "2014-11-11T08:40:51.620Z"
-        }]
-        return citizens
+        citizens = g.db.get_citizens()
+        return Response (ujson.dumps(citizens), 200, mimetype=MIME_TYPE)
     
     def post(self):
         data = request.get_json()
@@ -138,36 +152,36 @@ class Citizens(Resource):
 
         try:
             uuid = data['citizen_id']
+            nickname = data['name']
             address = data['address']
+            newid = g.db.create_citizen(uuid, nickname)
+            if not newid:
+                abort(500)
         except:
-            abort (400)
-
-        #uuid = "12345678-1234-5678-1234-567812345678"
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include citizen ID, name and Address",
+                                             "Citizens")
         url = api.url_for(Citizen, citizenid=uuid)
 
         return Response(status=201, headers={'Location':url})
 
 class Citizen(Resource):
     def get(self, citizenid):
-        citizen = {
-            "citizen_id": citizenid,
-            "address":"Yliopistokatu 16",
-            "created_at": "2014-11-11T08:40:51.620Z"
-            }
-        return citizen
+        citizen = g.db.get_citizen(citizenid)
+        if not citizen:
+            return create_error_response(404, "Unknown citizen",
+                                         "There is no citizen with id %s" % citizenid,
+                                         "Citizen")
+        
+        return Response (ujson.dumps(citizen), 200, mimetype=MIME_TYPE)
 
 class HelpRequests(Resource):
     def get(self):
-        volunteerid = request.args.get('volunteerid', '-1')
-        helpRequests = [{
-            "request_id": "12345678-1234-5678-1234-567812345678",
-            "volunteerid": volunteerid,
-            "citizenid": "12345678-4321-8765-1234-567812345678",
-            "request": "some items to buy please!",
-            "answer": "Sure!",
-            "status": "in progress"
-        }]
-        return helpRequests
+        volunteerid = request.get('volunteerid', '-1')
+        requests = g.db.get_help_requests(volunteerid)
+        return Response (ujson.dumps(requests), 200, mimetype=MIME_TYPE)
 
     def post(self):
         data = request.get_json()
@@ -178,26 +192,29 @@ class HelpRequests(Resource):
             volunteer_id = data['volunteer_id']
             citizen_id = data['citizen_id']
             request = data['request']
+            newid = g.db.create_help_request(volunteer_id, citizen_id, request)
+            if not newid:
+                abort(500)
         except:
-            abort (400)
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer_id, citizen ID and request",
+                                             "HelpRequests")
 
-        uuid = "87654321-1234-5678-1234-567812345678"
-        url = api.url_for(HelpRequest, requestid=uuid)
-
+        url = api.url_for(HelpRequest, requestid=newid)
         return Response(status=201, headers={'Location':url})
+
 
 class HelpRequest(Resource):
     def get(self, requestid):
-        volunteerid = request.args.get('uid', '-1')
-        helpRequest = {
-            "request_id": "12345678-1234-5678-1234-567812345678",
-            "volunteerid": volunteerid,
-            "citizenid": "12345678-4321-8765-1234-567812345678",
-            "request": "some items to buy please!",
-            "answer": "Sure!",
-            "status": "in progress"
-        }
-        return helpRequest
+        helpRequest = g.db.get_citizen(requestid)
+        if not helpRequest:
+            return create_error_response(404, "Unknown request",
+                                         "There is no request with id %s" % requestid,
+                                         "HelpRequest")
+        
+        return Response (ujson.dumps(helpRequest), 200, mimetype=MIME_TYPE)
 
     def post(self, requestid):
         data = request.get_json()
@@ -205,21 +222,22 @@ class HelpRequest(Resource):
             raise UnsupportedMediaType()
 
         try:
-            volunteer_id = data['volunteer_id']
             answer = data['answer']
+            vid = g.db.modify_help_request(requestid, answer)
+            if not vid:
+                abort(500)
         except:
-            abort (400)
+            #This is launched if either title or body does not exist or if 
+            # the template.data array does not exist.
+            return create_error_response(400, "Wrong request format",
+                                             "Be sure you include volunteer ID and answer",
+                                             "HelpRequest")
 
         url = api.url_for(HelpRequest, requestid=requestid)
 
         return Response(status=201, headers={'Location':url})
 
-api.add_resource(Citizens,'/citizens/',endpoint='citizens')
-
-api.add_resource(Citizen,'/citizens/<citizenid>',
-                 endpoint='citizen')
-
-api.add_resource(Volunteers,'/volunteers',
+api.add_resource(Volunteers,'/volunteers/',
                  endpoint='volunteers')
 api.add_resource(Volunteer,'/volunteers/<volunteerid>',
                  endpoint='volunteer')
@@ -227,6 +245,13 @@ api.add_resource(VolunteerStatus,'/volunteers/<volunteerid>/status',
                  endpoint='status')
 api.add_resource(VolunteerLocation,'/volunteers/<volunteerid>/location',
                  endpoint='location')
+api.add_resource(VolunteerScore,'/volunteers/<volunteerid>/score',
+                 endpoint='score')
+
+api.add_resource(Citizens,'/citizens/', endpoint='citizens')
+
+api.add_resource(Citizen,'/citizens/<citizenid>',
+                 endpoint='citizen')
 
 api.add_resource(HelpRequests,'/requests/',
                  endpoint='requests')

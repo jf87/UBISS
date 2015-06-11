@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS volunteers_postions(
 
 CREATE TABLE IF NOT EXISTS citizens(
   citizen_id TEXT PRIMARY KEY,
-  nickname TEXT,
+  name TEXT,
   address TEXT);
 
 CREATE TABLE IF NOT EXISTS requests(
   request_id INTEGER PRIMARY KEY AUTOINCREMENT,
   volunteer_id TEXT,
   citizen_id TEXT,
-  shopping_list TEXT,
+  request TEXT,
   answer TEXT,
   status INTEGER, /* 0: Pending, 1: In Progress, 2: Closed*/
   rtimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
