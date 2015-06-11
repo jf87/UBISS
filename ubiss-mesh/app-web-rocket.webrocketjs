@@ -99,12 +99,12 @@ var WebRocketApplication = IApplication.$extend(
         // Setup default environment
         Tundra.plugins.meshmoonGeo.setupEnvironment();
 
-        var p = IApplication.loadDependencies(this,"uuid-input-element.html");
+        var p = IApplication.loadDependencies(this,"citizen-input-element_wip.html");
         var _this = this;
         p.done(function(v){
-            console.log('loaded the new baby polymer element! ');
-            _this.uiElement = document.createElement("uuid-input-element");
-            Tundra.ui.add([uiElement]);
+            console.log('loaded the new baby citizen polymer element! ');
+            _this.uiElement = document.createElement("citizen-input-element");
+            Tundra.ui.add([_this.uiElement]);
             console.log('... and positioned it!');
         });
 

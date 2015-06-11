@@ -37,19 +37,20 @@
 	</template>
 <script>
 	Polymer('citizen-input-element',{
-		buttonClick: function send({{committedUuid}}, {{committedAddress}}, {{committedList}}) {
-   		var jsonData = '{"uuid": "' + commitedUuid + '", "address" : "' + commitedAddress + '", "list" : "' + commitedList + '"}'
-   		$.ajax ({
-      		type: "POST",
-      		//the url where you want to send the data to
-      		url: 'url to the server/update',
-      		//json object to send
-      		data:'json='+jsonData ,
-      		success: function () {
+		buttonClick: function (){
+            var jsonData = '{"uuid": "' + this.commitedUuid + '", "address" : "' + this.commitedAddress + '", "list" : "' + this.commitedList + '"}';
 
-       		alert("Thanks!"); 
-      		}
-  			})
+            $.ajax ({
+                type: "POST",
+                //the url where you want to send the data to
+                url: 'url to the server/update',
+                //json object to send
+                data:'json='+jsonData ,
+                success: function () {
+
+                alert("Thanks!"); 
+                }
+            });
 		}
 	});
 </script>
