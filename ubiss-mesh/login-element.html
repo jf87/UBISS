@@ -1,34 +1,32 @@
-<polymer-element name="input-element">
+<polymer-element name="login-element">
     <template>
         <style>
             :host {
                 position: absolute;
                 top: 25;
                 left: 25;
-                min-width: 100px;
+                min-width: 200px;
 					 background-color: white;
             }
+				paper-button[raised].colored {
+      		background: #4285f4;
+      		color: #fff;
+    			}
         </style>
-				<paper-shadow class="card" z="2">
-				<paper-input-decorator label="Your Name" floatingLabel error="input is required!" autoValidate>
+				<paper-shadow class="card" z="3" style="padding: 20px 10px">
+				<paper-input-decorator label="Your Name" floatingLabel error="Please enter your name" autoValidate>
       		<input is="core-input" value="{{uname}}" required valur=>
     			</paper-input-decorator>
-
-				<paper-input-decorator label="Your Street Address, Post Code, Country" floatingLabel error="input is required!" autoValidate>
+				<paper-input-decorator label="Your Address" floatingLabel error="Street Address, Post Code, Country" autoValidate>
       		<input is="core-input" value="{{address}}" required valur=>
     			</paper-input-decorator>
-
-				<paper-input-decorator label="Your Request" floatingLabel error="input is required!" autoValidate>
-      		<input is="core-input" value="{{request}}" required valur=>
-    			</paper-input-decorator>
-				<button on-click="{{onClick}}">Send Request</button>
+				<paper-button raised class="colored" on-click="{{onClickLogin}}">Login</paper-button>
 				</paper-shadow>
     </template>
 <script>
-	Polymer('input-element', {
+	Polymer('login-element', {
 		uname : '',
 		address : '',
-		request : '',
 		uuid: function() {
         var d = new Date().getTime();
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -38,8 +36,8 @@
         });
         return uuid;
     },
-		onClick: function () {
-			$.post( "http://188.166.122.113:5000/requests", { citizen_id: this.uuid(), name: this.uname, address: this.address, request: this.request } );
+		onClickLogin: function () {
+			$.post( "http://188.166.122.113:5000/citizens", { citizen_id: this.uuid(), name: this.uname, address: this.address } );
 		}
 	});
 </script>

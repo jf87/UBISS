@@ -1,0 +1,41 @@
+<polymer-element name="request-element">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                top: 25;
+                left: 25;
+                min-width: 200px;
+					 background-color: white;
+            }
+				paper-button[raised].colored {
+      		background: #4285f4;
+      		color: #fff;
+    			}
+        </style>
+				<paper-shadow class="card" z="3" style="padding: 20px 10px">
+				<paper-input-decorator label="Your Request" floatingLabel error="Please enter your request" autoValidate>
+      		<input is="core-input" value="{{request}}" required valur=>
+    			</paper-input-decorator>
+				<paper-button raised class="colored" on-click="{{onClickSend}}">Send Request</paper-button>
+				</paper-shadow>
+    </template>
+<script>
+	Polymer('request-element', {
+		request : '',
+		volunteer_id : 'Mikko',
+		uuid: function() {
+        var d = new Date().getTime();
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = (d + Math.random()*16)%16 | 0;
+            d = Math.floor(d/16);
+            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        });
+        return uuid;
+    },
+		onClickSend: function () {
+			$.post( "http://188.166.122.113:5000/requests", { request_id: this.uuid(), volunteer_id: this.volunteer_id, citizen_id: this.uuid(), request: this.request } );
+		}
+	});
+</script>
+</polymer-element>
