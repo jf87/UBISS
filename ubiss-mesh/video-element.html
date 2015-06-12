@@ -1,0 +1,27 @@
+<polymer-element name="video-element">
+    <template>
+        <style>
+            :host {
+                top: 25;
+                left: 25;
+                min-width: 640px;
+                min-height: 480px;
+                background-color: white;
+            }
+
+            core-icon-button.colored {
+                background: #4285f4;
+                color: #fff;
+            }
+
+        </style>
+
+        <paper-dialog id="videoDialog" backdrop autoCloseDisabled layered="false">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <core-icon-button icon="av:play-arrow" affirmative autofocus></core-icon-button>
+        </paper-dialog>
+    </template>
+<script>
+    Polymer('video-element', {});
+</script>
+</polymer-element>

@@ -62,7 +62,6 @@ var Volunteers = Backbone.Collection.extend({
     },
 });
 
-
 var WebRocketApplication = IApplication.$extend(
 {
     __init__ : function()
@@ -108,24 +107,23 @@ var WebRocketApplication = IApplication.$extend(
 
         // Setup default environment
         Tundra.plugins.meshmoonGeo.setupEnvironment();
-        var p = IApplication.loadDependencies(this,"uuid-input-element.html");
         var _this = this;
-        p.done(function(v){
-            console.log('loaded the new baby polymer element! ');
-            this.uiElement = document.createElement("uuid-input-element");
-            this.framework.ui.addWidgetToScene([this.uiElement]);
-            console.log('... and positioned it (legacy)!');
+
+        var _loadPolymerElements = IApplication.loadDependencies(this,"request-element.html", "video-element.html", "login-element.html");
+        _loadPolymerElements.done(function(v){
+            console.log('loaded the new baby polymer element(s)! ');
+            this.loginElement = document.createElement("login-element");
+            this.requestElement = document.createElement("request-element");
+            this.videoElement = document.createElement("video-element");
+            this.requestElement.hidden=true;
+            Tundra.ui.addToCorner(this.loginElement, Tundra.ui.$class.Corner.TopLeft, Tundra.ui.$class.Position.End);
+            Tundra.ui.addToCorner(this.requestElement, Tundra.ui.$class.Corner.TopLeft, Tundra.ui.$class.Position.End);
+            console.log('... and positioned them HIGHER!!');
         }.bind(this));
 
-        this.imageElement = $("<img/>");
-        this.imageElement.css({
-            "position" : "absolute",
-            "top": 25,
-            "left": 25,
-            "width": "100px"
-        })
-        this.imageElement.hide(); 
-        this.framework.ui.addWidgetToScene([this.imageElement]);
+
+        this.cameraEnt = Tundra.scene.createLocalEntity(["Name", "Placeable", "Camera"]);
+        //this.rtsCamera = Tundra.renderer.activeCamera();
 
         this.subscribeEvent(Tundra.input.onMousePress(this, this.onMousePress));
 
@@ -134,20 +132,28 @@ var WebRocketApplication = IApplication.$extend(
         //var transfer = Tundra.asset.requestAsset("http://www.oulunliikenne.fi/rss/weather_camera/camera.xml");
         //transfer.onCompleted(this, this.onAssetTransferCompleted);
     },
-
+    switchToFreeCamera: function(volunteerEntityId){
+        console.log("Free Camera!");
+        this.cameraEnt.placeable.parentRef = volunteerEntityId;
+        //this.camEntity.placeable.setParent(volunteerEntity);
+        this.cameraEnt.camera.setActive();
+    },
+    switchToRTSCamera: function(){
+        console.log("RTS Camera!");
+        if(this.rtsCamera)
+            this.rtsCamera.setActive();
+        //this.rtsCamera.setActive();
+    },
     createVolunteerEntity: function(latitude, longitude, name)
     {
         var pos = Tundra.plugins.meshmoonGeo.coordinates.latLonToWorldPosition(latitude, longitude);
         var entity = Tundra.scene.createLocalEntity(["Name", "Mesh", "Placeable"]);
         entity.name = name;
-        //entity.mesh.meshRef = "http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere.mesh";
-        //entity.mesh.materialRefs = ["http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere_yellow.material"];
         entity.mesh.meshRef = "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/avatar.mesh"
         entity.mesh.materialRefs = ["http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/color.material",
                                     "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/profile.material"]
         entity.placeable.setPosition(new THREE.Vector3(pos.x, 150, pos.z));
-        entity.placeable.setScale(new THREE.Vector3(50, 50, 50));
-        debugger;
+        entity.placeable.setScale(new THREE.Vector3(20, 20, 20));
         return entity;
     },
 
@@ -161,7 +167,6 @@ var WebRocketApplication = IApplication.$extend(
         var tween = new TWEEN.Tween( { x: oldpos.x, z: oldpos.z } )
                 .to( { x: pos.x , z:pos.z}, 3000 )
                 .onUpdate( function () {
-                    console.log("tweening .. ", this.x, this.z);
                     entity.placeable.setPosition(new THREE.Vector3(this.x, 150, this.z));
                 } )
                 .start();
@@ -179,8 +184,21 @@ var WebRocketApplication = IApplication.$extend(
         if(r.entity) 
         {
             var volunteer = webRocketApplication.volunteers.findWhere({"entity_id": r.entity.id})
-            if(volunteer)
+            if(volunteer){
+                this.requestElement.hidden=false;
+                this.switchToFreeCamera(r.entity.id);
                 console.log(volunteer);
+            }
+            else
+            {
+                this.requestElement.hidden=true;
+                this.switchToRTSCamera();
+            }
+        }
+        else
+        {
+            this.requestElement.hidden=true;
+            this.switchToRTSCamera();
         }
     },
 
@@ -199,10 +217,11 @@ var WebRocketApplication = IApplication.$extend(
         // If RTS camera execute configuration
         if (this.camera.name === "MeshmoonRtsCamera" && this.state.camera.configured === undefined)
         {
+            this.rtsCamera = activeCameraComponent;
             this.state.camera.configured = true;
             this.timing.async("rts.config", function() {
                 this.camera.exec(EntityAction.Local, "SetRotation", { x : -40, y : 0, z : 0 });
-                this.camera.exec(EntityAction.Local, "SetDistance", 3000);
+                this.camera.exec(EntityAction.Local, "SetDistance", 2000);
                 this.camera.exec(EntityAction.Local, "SetMinDistance", 200);
                 this.camera.exec(EntityAction.Local, "SetMaxDistance", this.camera.camera.farPlane * 0.4);
             }, 100);
@@ -231,4 +250,4 @@ setInterval(function(){
             console.log("Volunteers received:", volunteers);
         },
     });
-}.bind(webRocketApplication), 5000);
+}.bind(webRocketApplication), 30000);

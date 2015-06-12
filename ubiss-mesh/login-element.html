@@ -2,10 +2,9 @@
     <template>
         <style>
             :host {
-                position: absolute;
                 top: 25;
                 left: 25;
-                min-width: 200px;
+                min-width: 300px;
 					 background-color: white;
             }
 				paper-button[raised].colored {
@@ -20,25 +19,37 @@
 				<paper-input-decorator label="Your Address" floatingLabel error="Street Address, Post Code, Country" autoValidate>
       		<input is="core-input" value="{{address}}" required valur=>
     			</paper-input-decorator>
-				<paper-button raised class="colored" on-click="{{onClickLogin}}">Login</paper-button>
+				<paper-button raised class="colored" on-click="{{onClickLogin}}" disabled?="{{ disable == 1 }}">Login</paper-button>
 				</paper-shadow>
     </template>
 <script>
 	Polymer('login-element', {
-		uname : '',
+		disable: 0,
+        uname : '',
 		address : '',
 		uuid: function() {
         var d = new Date().getTime();
         var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = (d + Math.random()*16)%16 | 0;
-            d = Math.floor(d/16);
-            return (c=='x' ? r : (r&0x3|0x8)).toString(16);
-        });
-        return uuid;
-    },
-		onClickLogin: function () {
-			$.post( "http://188.166.122.113:5000/citizens", { citizen_id: this.uuid(), name: this.uname, address: this.address } );
-		}
+                var r = (d + Math.random()*16)%16 | 0;
+                d = Math.floor(d/16);
+                return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+            });
+            return uuid;
+        },
+    	onClickLogin: function () {
+            this.disable++
+            var citizen = {
+                        "citizen_id": this.uuid(),
+                        "name": this.uname,
+                        "address": this.address
+                        };
+    		$.ajax( { url: base_url + "/citizens/",
+                    dataType: "json",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(citizen)
+                });
+    	}
 	});
 </script>
 </polymer-element>
