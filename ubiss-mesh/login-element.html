@@ -7,19 +7,19 @@
                 min-width: 300px;
 					 background-color: white;
             }
-				paper-button[raised].colored {
-      		background: #4285f4;
-      		color: #fff;
-    			}
+			paper-button[raised].colored {
+          		background: #4285f4;
+          		color: #fff;
+    		}
         </style>
 				<paper-shadow class="card" z="3" style="padding: 20px 10px">
-				<paper-input-decorator label="Your Name" floatingLabel error="Please enter your name" autoValidate>
-      		<input is="core-input" value="{{uname}}" required valur=>
-    			</paper-input-decorator>
-				<paper-input-decorator label="Your Address" floatingLabel error="Street Address, Post Code, Country" autoValidate>
-      		<input is="core-input" value="{{address}}" required valur=>
-    			</paper-input-decorator>
-				<paper-button raised class="colored" on-click="{{onClickLogin}}" disabled?="{{ disable == 1 }}">Login</paper-button>
+    				<paper-input-decorator label="Your Name" floatingLabel error="Please enter your name" autoValidate>
+          		        <input is="core-input" value="{{uname}}" required valur=>
+        			</paper-input-decorator>
+    				<paper-input-decorator label="Your Address" floatingLabel error="Street Address, Post Code, Country" autoValidate>
+          		        <input is="core-input" value="{{address}}" required valur=>
+        			</paper-input-decorator>
+    				<paper-button raised class="colored" on-click="{{onClickLogin}}" disabled?="{{ disable == 1 }}">Login</paper-button>
 				</paper-shadow>
     </template>
 <script>

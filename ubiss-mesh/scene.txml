@@ -28,4 +28,591 @@
    <attribute value="" type="string" id="className" name="Script class name"/>
   </component>
  </entity>
+ <entity id="1" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_30_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1.01999998,1.01999998,1.01999998" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_30_LP/b1_30_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_30_LP/b1_30_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="135.979996,2.92999983,-132.639999,-0,-32.4000015,1.99999999e-006,1.04999995,1.04999995,1.04999995" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="2" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_20_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_20_LP/b1_20_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_20_LP/b1_20_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-16.9099998,2.94097996,-122.480003,-0,-33.327919,1.99999999e-006,1.02999997,1.02999997,1.02999997" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="3" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_39_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,56.5,0,1.01999998,1.01999998,1.01999998" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_39_LP/b1_39_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_39_LP/b1_39_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-50.7999992,5.4400005,-244.059998,0,-0,0,1.04999995,1.04999995,1.04999995" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="4" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_17_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_17_LP/b1_17_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_17_LP/b1_17_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-211.199997,5.0699997,35.4799995,-0,-33.0810051,1.99999999e-006,1.01999998,1.01999998,1.01999998" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="5" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b3_6_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_6_LP/b3_6_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_6_LP/b3_6_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-383.279999,5.4200001,88.3499985,-0,-32.6399994,1.99999999e-006,1.10000002,1.10000002,1.10000002" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="6" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_38_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,146.5,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_38_LP/b1_38_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_38_LP/B1_38_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-471.940002,3.61000013,-369.529999,0,0,0,1,1,1" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="7" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_33_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_33_LP/b1_33_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_33_LP/b1_33_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-314.459991,4.5699997,-395.079987,-9.99999997e-007,-32.2700005,1.99999999e-006,1.04999995,1.04999995,1.04999995" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="8" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_7_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_7_LP/b1_7_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_7_LP/b1_7_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-177.5,4.4617996,-234.089996,-1.99999999e-006,56.9439354,-3.99999999e-006,1.04999995,1.04999995,1.04999995" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="9" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_16_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_16_LP/b1_16_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_16_LP/b1_16_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-106.050003,4.03999996,-86.2099991,-0,-32.1500015,1.99999999e-006,1.01999998,1.01999998,1.01999998" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="10" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_15_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_15_LP/b1_15_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_15_LP/b1_15_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-82.3300018,3.25,-121.510002,-1.99999999e-006,57.0725517,-3.99999999e-006,1.00999999,1.02999997,1.00999999" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="11" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_19_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_19_LP/b1_19_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_19_LP/b1_19_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-80.8300018,4.1000004,-20.1599998,-0,-32.0299988,1.99999999e-006,1.01999998,1.20000005,1.01999998" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="12" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_18_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_18_LP/b1_18.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_18_LP/b3_18_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-129.529999,4.3644009,48.3400002,-0,-33,1.99999999e-006,1.02999997,1.02999997,1.02999997" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="13" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b3_14_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_14_LP/b3_14.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_14_LP/b3_14_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-224.029999,5.70617008,187.509995,-1.99999999e-006,58.5999985,-3.99999999e-006,1.01999998,1.01999998,1.01999998" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="14" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b3_20_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_20_LP/b3_20_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b3_20_LP/b3_20_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-94.8399963,6.5999999,243.419998,-0,-32.7770233,1.99999999e-006,1.02999997,1.02999997,1.02999997" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="15" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_32_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_32_LP/b1_32_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_32_LP/b1_32_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-24.8099995,7.03999996,151.559998,-1.99999999e-006,58.1699982,-3.99999999e-006,1.01999998,1.14999998,1.01999998" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="16" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_31_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_31_LP/b1_31_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_31_LP/b1_31_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="35.5600014,8.44999981,6.34000015,-0,-32.5,1.99999999e-006,1.00999999,1.00999999,1.00999999" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="17" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="b1_5_LP" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: Oulu3D lowdetail" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_5_LP/b1_5_LP.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/Oulu3D-lowdetail/b1_5_LP/b1_5_LP_lm.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-282.519989,0,-57.1399994,-0,-32.3310356,1.99999999e-006,1.04999995,1.04999995,1.04999995" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="18" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="text_rotuaari" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,-5,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/text_rotuaari.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts.material;http://tundra-ludocraft.s3.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts_transparent.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-86.9700012,26.5888748,-82.9599991,90.0000305,58,0,2,2,2" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+  <component typeId="25" type="DynamicComponent" sync="true" name="OuluPOI">
+   <attribute value="true" type="bool" id="gotoOnClick" name="gotoOnClick"/>
+   <attribute value="true" type="bool" id="openUrlOnClick" name="openUrlOnClick"/>
+   <attribute value="-138.559998 10 3.49000001" type="float3" id="pos" name="pos"/>
+   <attribute value="-6 -40 0" type="float3" id="rot" name="rot"/>
+   <attribute value="Go to Rotuaari" type="string" id="text" name="text"/>
+   <attribute value="http://doc.meshmoon.com/projects/weboulu-kiertoajelu/html/rotuaari.html" type="string" id="url" name="url"/>
+  </component>
+ </entity>
+ <entity id="19" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="text_kauppatori" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/text_kauppatori.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts.material;http://tundra-ludocraft.s3.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts_transparent.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="-418.019989,29.7199993,-249.25,90.0000305,58,0,2,2,2" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+  <component typeId="25" type="DynamicComponent" sync="true" name="OuluPOI">
+   <attribute value="true" type="bool" id="gotoOnClick" name="gotoOnClick"/>
+   <attribute value="true" type="bool" id="openUrlOnClick" name="openUrlOnClick"/>
+   <attribute value="-373 6.30000019 -165" type="float3" id="pos" name="pos"/>
+   <attribute value="-1 88 0" type="float3" id="rot" name="rot"/>
+   <attribute value="Go to Kauppatori" type="string" id="text" name="text"/>
+   <attribute value="http://doc.meshmoon.com/projects/weboulu-kiertoajelu/html/kauppatori.html" type="string" id="url" name="url"/>
+  </component>
+ </entity>
+ <entity id="20" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="text_ottokarhinaukio" type="string" id="name" name="Name"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="description" name="Description"/>
+   <attribute value="Meshmoon Layer: WebOulu_CityObjects" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="17" type="Mesh" sync="true">
+   <attribute value="0,0,0,0,0,0,1,1,1" type="Transform" id="nodeTransformation" name="Transform"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/text_ottokarhinaukio.mesh" type="AssetReference" id="meshRef" name="Mesh ref"/>
+   <attribute value="" type="AssetReference" id="skeletonRef" name="Skeleton ref"/>
+   <attribute value="http://tundra-ludocraft.s3-eu-west-1.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts.material;http://tundra-ludocraft.s3.amazonaws.com/WebOulu_CityObjects/Texts/3d_texts_transparent.material" type="AssetReferenceList" id="materialRefs" name="Mesh materials"/>
+   <attribute value="0" type="real" id="drawDistance" name="Draw distance"/>
+   <attribute value="true" type="bool" id="castShadows" name="Cast shadows"/>
+   <attribute value="false" type="bool" id="useInstancing" name="Use instancing"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="102.07,23,-31.3700008,90.0000305,57,0,0.899999976,0.899999976,0.899999976" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="parent" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+  <component typeId="25" type="DynamicComponent" sync="true" name="OuluPOI">
+   <attribute value="true" type="bool" id="gotoOnClick" name="gotoOnClick"/>
+   <attribute value="true" type="bool" id="openUrlOnClick" name="openUrlOnClick"/>
+   <attribute value="93.2699966 10 48.5099983" type="float3" id="pos" name="pos"/>
+   <attribute value="-4.19999981 29.7999992 0" type="float3" id="rot" name="rot"/>
+   <attribute value="Go to Otto Karhi park" type="string" id="text" name="text"/>
+   <attribute value="http://doc.meshmoon.com/projects/weboulu-kiertoajelu/html/otto-karhin-puisto.html" type="string" id="url" name="url"/>
+  </component>
+ </entity>
+ <entity id="21" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="parent" type="string" id="name" name="Name"/>
+   <attribute value="" type="string" id="description" name="Description"/>
+   <attribute value="" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="178,-15,187.610001,0,0,0,2.25,2.25,2.25" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+ </entity>
+ <entity id="23" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="RocketEnvironment" type="string" id="name" name="Name"/>
+   <attribute value="" type="string" id="description" name="Description"/>
+   <attribute value="" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="32" type="SceneShadowSetup" sync="true" name="RocketShadowSetup">
+   <attribute value="0.930000007" type="real" id="splitLambda" name="Split lambda"/>
+   <attribute value="8.5" type="real" id="firstSplitDist" name="First split distance"/>
+   <attribute value="250" type="real" id="farDist" name="Far distance"/>
+   <attribute value="50" type="real" id="fadeDist" name="Fade distance"/>
+   <attribute value="0.239999995" type="real" id="depthBias1" name="Depth bias 1"/>
+   <attribute value="0.720000029" type="real" id="depthBias2" name="Depth bias 2"/>
+   <attribute value="5" type="real" id="depthBias3" name="Depth bias 3"/>
+   <attribute value="12" type="real" id="depthBias4" name="Depth bias 4"/>
+  </component>
+  <component typeId="10" type="Sky" sync="true" name="RocketSky">
+   <attribute value="Ogre Media:RexSkyBox.material" type="AssetReference" id="materialRef" name="Material"/>
+   <attribute value="" type="AssetReferenceList" id="textureRefs" name="Texture"/>
+   <attribute value="999" type="real" id="distance" name="Distance"/>
+   <attribute value="0 0 0 1" type="Quat" id="orientation" name="Orientation"/>
+   <attribute value="true" type="bool" id="drawFirst" name="Draw first"/>
+   <attribute value="true" type="bool" id="enabled" name="Enabled"/>
+  </component>
+  <component typeId="8" type="EnvironmentLight" sync="true" name="RocketEnvironmentLight">
+   <attribute value="0.588235319 0.58431375 0.486274511 1" type="Color" id="sunColor" name="Sunlight color"/>
+   <attribute value="0.360784322 0.360784322 0.360784322 1" type="Color" id="ambientColor" name="Ambient light color"/>
+   <attribute value="-0.223238483 -0.974761188 0.00233840733" type="float3" id="sunDirection" name="Sunlight direction vector"/>
+   <attribute value="true" type="bool" id="sunCastShadows" name="Sunlight cast shadows"/>
+   <attribute value="1" type="real" id="brightness" name="Brightness"/>
+  </component>
+ </entity>
+ <entity id="27" sync="true">
+  <component typeId="26" type="Name" sync="true">
+   <attribute value="ground" type="string" id="name" name="Name"/>
+   <attribute value="" type="string" id="description" name="Description"/>
+   <attribute value="" type="string" id="group" name="Group"/>
+  </component>
+  <component typeId="20" type="Placeable" sync="true">
+   <attribute value="0,1,0,0,0,0,1,1,1" type="Transform" id="transform" name="Transform"/>
+   <attribute value="false" type="bool" id="drawDebug" name="Show bounding box"/>
+   <attribute value="true" type="bool" id="visible" name="Visible"/>
+   <attribute value="1" type="int" id="selectionLayer" name="Selection layer"/>
+   <attribute value="" type="EntityReference" id="parentRef" name="Parent entity ref"/>
+   <attribute value="" type="string" id="parentBone" name="Parent bone name"/>
+  </component>
+  <component typeId="23" type="RigidBody" sync="true">
+   <attribute value="0" type="real" id="mass" name="Mass"/>
+   <attribute value="0" type="int" id="shapeType" name="Shape type"/>
+   <attribute value="1500 1 1500" type="float3" id="size" name="Size"/>
+   <attribute value="" type="AssetReference" id="collisionMeshRef" name="Collision mesh ref"/>
+   <attribute value="0.5" type="real" id="friction" name="Friction"/>
+   <attribute value="0" type="real" id="restitution" name="Restitution"/>
+   <attribute value="0" type="real" id="linearDamping" name="Linear damping"/>
+   <attribute value="0" type="real" id="angularDamping" name="Angular damping"/>
+   <attribute value="1 1 1" type="float3" id="linearFactor" name="Linear factor"/>
+   <attribute value="1 1 1" type="float3" id="angularFactor" name="Angular factor"/>
+   <attribute value="false" type="bool" id="kinematic" name="Kinematic"/>
+   <attribute value="false" type="bool" id="phantom" name="Phantom"/>
+   <attribute value="true" type="bool" id="drawDebug" name="Draw Debug"/>
+   <attribute value="0 0 0" type="float3" id="linearVelocity" name="Linear velocity"/>
+   <attribute value="0 0 0" type="float3" id="angularVelocity" name="Angular velocity"/>
+   <attribute value="-1" type="int" id="collisionLayer" name="Collision Layer"/>
+   <attribute value="-1" type="int" id="collisionMask" name="Collision Mask"/>
+   <attribute value="0.5" type="real" id="rollingFriction" name="Rolling friction"/>
+   <attribute value="true" type="bool" id="useGravity" name="Use gravity"/>
+  </component>
+ </entity>
 </scene>

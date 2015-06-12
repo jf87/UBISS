@@ -4,20 +4,39 @@
             :host {
                 top: 25;
                 left: 25;
-                min-width: 300px;
+                min-width: 100px;
 					 background-color: white;
             }
-				paper-button[raised].colored {
-      		background: #4285f4;
-      		color: #fff;
-    			}
+            .big {
+                height: 50px;
+                width: 50px;
+            }
+            paper-button{
+                border-radius: 100px;
+            }
+            paper-button::shadow #ripple {
+                color: blue;
+            }
         </style>
-				<paper-shadow class="card" z="3" style="padding: 20px 10px">
-				<paper-input-decorator label="Your Request" floatingLabel error="Please enter your request" autoValidate>
-      		<input is="core-input" value="{{request}}" required valur=>
-    			</paper-input-decorator>
-				<paper-button raised class="colored" on-click="{{onClickSend}}">Send Request</paper-button>
-				</paper-shadow>
+		<paper-shadow class="card" z="3" style="padding: 20px 10px">
+        <div layout vertical>
+            <div layout horizontal>
+                <paper-button><core-icon class="big" src="icon1.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon2.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon3.png"></core-icon></paper-button>
+            </div>
+            <div layout horizontal>
+                <paper-button><core-icon class="big" src="icon4.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon5.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon6.png"></core-icon></paper-button>
+            </div>
+            <div layout horizontal>
+                <paper-button><core-icon class="big" src="icon7.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon8.png"></core-icon></paper-button>
+                <paper-button><core-icon class="big" src="icon9.png"></core-icon></paper-button>
+            </div>
+        </div>
+		</paper-shadow>
     </template>
 <script>
 	Polymer('request-element', {

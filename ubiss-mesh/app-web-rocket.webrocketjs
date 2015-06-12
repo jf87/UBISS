@@ -1,4 +1,6 @@
 var base_url = "http://188.166.122.113:5000";
+var image_base_prefix = "http://tundra-blueshift.s3.amazonaws.com/Kostes-Harvester/images/";
+var image_base_suffix = ".png";
 
 var Volunteer = Backbone.Model.extend({
     urlRoot: "/volunteers",
@@ -9,7 +11,7 @@ var Volunteer = Backbone.Model.extend({
         longitude: null,
         status: "",
         entity_id: null
-    }    
+    }
 });
 
 var Volunteers = Backbone.Collection.extend({
@@ -70,6 +72,7 @@ var WebRocketApplication = IApplication.$extend(
         this.$super("Meshmoon GEO");
         
         this.data = {};
+        this.userTextures = [];
 
         this.timing = new AsyncHelper(this.name, this);
         this.state =
@@ -99,8 +102,8 @@ var WebRocketApplication = IApplication.$extend(
            You can change this coordinate to be anywhere in the world
            and Meshmoon GEO will do its best to visualize the location. */
         Tundra.plugins.meshmoonGeo.start({
-            lon : 25.466228,
-            lat : 65.013439
+            lon : 25.47145260000002,
+            lat : 65.0126148
         });
         //In Tundra scale is 1 unit = 1m
         //The documentation need some entry points
@@ -109,20 +112,24 @@ var WebRocketApplication = IApplication.$extend(
         Tundra.plugins.meshmoonGeo.setupEnvironment();
         var _this = this;
 
-        var _loadPolymerElements = IApplication.loadDependencies(this,"request-element.html", "video-element.html", "login-element.html");
+        var _loadPolymerElements = IApplication.loadDependencies(this, "request-element.html");
         _loadPolymerElements.done(function(v){
             console.log('loaded the new baby polymer element(s)! ');
-            this.loginElement = document.createElement("login-element");
             this.requestElement = document.createElement("request-element");
-            this.videoElement = document.createElement("video-element");
             this.requestElement.hidden=true;
-            Tundra.ui.addToCorner(this.loginElement, Tundra.ui.$class.Corner.TopLeft, Tundra.ui.$class.Position.End);
-            Tundra.ui.addToCorner(this.requestElement, Tundra.ui.$class.Corner.TopLeft, Tundra.ui.$class.Position.End);
+            Tundra.ui.addToCorner(this.requestElement, Tundra.ui.$class.Corner.BottomRight, Tundra.ui.$class.Position.Bottom);
+            //this.createVideoDialog();
             console.log('... and positioned them HIGHER!!');
         }.bind(this));
-
+        
+        Tundra.asset.loadScript("https://static.opentok.com/webrtc/v2.2/js/opentok.min.js").done(function() {
+            console.log("Loaded the new opentok!");
+            //_this.createVideoDialog();
+        });
 
         this.cameraEnt = Tundra.scene.createLocalEntity(["Name", "Placeable", "Camera"]);
+        this.cameraEnt.placeable.setPosition(0, 10, 0);
+        this.cameraEnt.placeable.setRotation(-45, 0, 0);
         //this.rtsCamera = Tundra.renderer.activeCamera();
 
         this.subscribeEvent(Tundra.input.onMousePress(this, this.onMousePress));
@@ -132,17 +139,68 @@ var WebRocketApplication = IApplication.$extend(
         //var transfer = Tundra.asset.requestAsset("http://www.oulunliikenne.fi/rss/weather_camera/camera.xml");
         //transfer.onCompleted(this, this.onAssetTransferCompleted);
     },
+
     switchToFreeCamera: function(volunteerEntityId){
         console.log("Free Camera!");
         this.cameraEnt.placeable.parentRef = volunteerEntityId;
-        //this.camEntity.placeable.setParent(volunteerEntity);
+        //this.cameraEnt.placeable.setParent(volunteerEntity);
         this.cameraEnt.camera.setActive();
     },
+
     switchToRTSCamera: function(){
         console.log("RTS Camera!");
-        if(this.rtsCamera)
+        if(this.rtsCamera && !this.rtsCamera.isActive()){
+            //this.state.camera.configured = undefined;
             this.rtsCamera.setActive();
+        }
         //this.rtsCamera.setActive();
+    },
+    initOpenTokSession: function(){
+        var apiKey = '45260162';
+        var sessionId = '2_MX40NTI2MDE2Mn5-MTQzNDEyOTczMTk4Mn5OTVFGVUlJaHZsQ016TGdzcllTOFFwR3h-fg'; 
+        var token = 'T1==cGFydG5lcl9pZD00NTI2MDE2MiZzaWc9ZWQxYzZiZTFkYmFhY2I1OTM4Zjg1MDQ3NWI2MmUzNjA1ZjExOTNmZTpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5USTJNREUyTW41LU1UUXpOREV5T1Rjek1UazRNbjVPVFZGR1ZVbEphSFpzUTAxNlRHZHpjbGxUT0ZGd1IzaC1mZyZjcmVhdGVfdGltZT0xNDM0MTI5ODc4Jm5vbmNlPTAuNzA3MjU2MjE4MDUxNzU3OSZleHBpcmVfdGltZT0xNDM0MjE2Mjc4';
+        var session = OT.initSession(apiKey, sessionId); 
+        session.on({ 
+          streamCreated: function(event) { 
+            session.subscribe(event.stream, 'subscribersDiv', {width: 640, height: 480, insertMode: 'append'}); 
+          } 
+        }); 
+        session.connect(token, function(error) {
+            if (error) {
+              console.log(error.message);
+            } else {
+              session.publish("tokbox-element", {width: 100, height: 100}); 
+            }
+        });                
+    },
+    createVideoDialog: function(){
+        //this.videoDialog= document.createElement("webrocket-dialog");
+        //this.videoDialog.buttonLabelAccept = "Close";
+        //this.videoDialog.addEventListener("done", function(e) {
+        //}.bind(this));
+        //this.videoElement = document.createElement("video-element");
+        //this.videoElement.openDialog();
+
+        //this.videoDialog.appendChild(this.videoElement);
+        //Tundra.ui.add(this.videoDialog);
+        //Tundra.ui.add(this.videoElement);
+        //$(this.videoElement).width = 640;
+        //$(this.videoElement).height = 480;
+        //this.videoElement.initSession();
+        this.videoElementSubscribers = $("<div/>", { id : "subscribersDiv", text : "TOKBOX HERE" });
+        this.videoElement = $("<div/>", { id : "tokbox-element", text : "TOKBOX HERE" });
+        this.videoElement.css({
+                            "position" : "absolute",
+                            "padding"  : 2,
+                            "top" : 250,
+                            "left" : 25,
+                            "font-family" : "RobotoDraft, Arial",
+                            "color" : "white",
+                            "background-color" : "rgba(8,149,195,0.8)"
+                        });
+        this.videoElement.show();
+        console.log("initialize session ...");
+        this.initOpenTokSession();
     },
     createVolunteerEntity: function(latitude, longitude, name)
     {
@@ -152,11 +210,47 @@ var WebRocketApplication = IApplication.$extend(
         entity.mesh.meshRef = "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/avatar.mesh"
         entity.mesh.materialRefs = ["http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/color.material",
                                     "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/profile.material"]
-        entity.placeable.setPosition(new THREE.Vector3(pos.x, 150, pos.z));
-        entity.placeable.setScale(new THREE.Vector3(20, 20, 20));
+        
+        entity.placeable.setPosition(new THREE.Vector3(pos.x, 8, pos.z));
+        entity.placeable.setRotation(30,0,0);
+        entity.placeable.setScale(new THREE.Vector3(10, 10, 10));
+        
+        var mesh_url = image_base_prefix + name + image_base_suffix ;
+        this.userTextures.push({"entity":entity, "mesh_url":mesh_url});
         return entity;
     },
 
+    updateUserTexture : function()
+    {
+        if (this.userTextures.length < 1)
+            return;
+
+        var obj = this.userTextures.pop();
+        var ent = obj.entity;
+        var imageUrl = obj.mesh_url;
+
+        if (!ent || !ent.mesh)
+            return;
+        var _that = this;
+        Tundra.asset.requestAsset(imageUrl, "Texture").onCompleted(ent, function(asset) {
+            var submesh = this.mesh.getSubmesh(1);
+            if (submesh && submesh.material && submesh.material.uniforms && submesh.material.uniforms.diffuseMap)
+            {
+                var clone = submesh.material.clone();
+                clone.uniforms.diffuseMap.value = asset.texture;
+                submesh.material = clone;
+                _that.updateUserTexture();
+            }
+            else
+            {
+                // Mesh or material not yet loaded, try again in a while
+                setTimeout(function() {
+                    _that.userTextures.push({"entity":this, "mesh_url":imageUrl});
+                    _that.updateUserTexture();
+                }.bind(this), 2500);
+            }
+        });
+    },
     moveVolunteerEntity: function(entityId, latitude, longitude)
     {
         var pos = Tundra.plugins.meshmoonGeo.coordinates.latLonToWorldPosition(latitude, longitude);
@@ -185,20 +279,34 @@ var WebRocketApplication = IApplication.$extend(
         {
             var volunteer = webRocketApplication.volunteers.findWhere({"entity_id": r.entity.id})
             if(volunteer){
-                this.requestElement.hidden=false;
-                this.switchToFreeCamera(r.entity.id);
+                if(this.requestElement)
+                    this.requestElement.hidden=false;
+                //this.switchToFreeCamera(r.entity.id);
+                if(!this.videoElement)
+                    this.createVideoDialog();
+
+                //this.videoDialog.open();
+                //this.videoElement.openDialog();
+
                 console.log(volunteer);
+                return false;
             }
             else
             {
-                this.requestElement.hidden=true;
-                this.switchToRTSCamera();
+                //if(this.videoDialog)
+                 //   this.videoDialog.close();
+                //if(this.requestElement)
+                //    this.requestElement.hidden=true;
+                //this.switchToRTSCamera();
             }
         }
         else
         {
-            this.requestElement.hidden=true;
-            this.switchToRTSCamera();
+            //if(this.videoDialog)
+            //    this.videoDialog.close();
+            //if(this.requestElement)
+            //    this.requestElement.hidden=true;
+            //this.switchToRTSCamera();
         }
     },
 
@@ -221,7 +329,7 @@ var WebRocketApplication = IApplication.$extend(
             this.state.camera.configured = true;
             this.timing.async("rts.config", function() {
                 this.camera.exec(EntityAction.Local, "SetRotation", { x : -40, y : 0, z : 0 });
-                this.camera.exec(EntityAction.Local, "SetDistance", 2000);
+                this.camera.exec(EntityAction.Local, "SetDistance", 1000);
                 this.camera.exec(EntityAction.Local, "SetMinDistance", 200);
                 this.camera.exec(EntityAction.Local, "SetMaxDistance", this.camera.camera.farPlane * 0.4);
             }, 100);
@@ -248,6 +356,7 @@ setInterval(function(){
     webRocketApplication.volunteers.fetch({
         success: function (volunteers, response) {
             console.log("Volunteers received:", volunteers);
-        },
+            webRocketApplication.updateUserTexture();
+        }
     });
 }.bind(webRocketApplication), 30000);
