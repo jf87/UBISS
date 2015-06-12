@@ -1,0 +1,37 @@
+<polymer-element name="video-element">
+  <template>
+    <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: white;
+      padding: 20px;
+    }
+	 </style>
+
+    <div id='myPublisherDiv'></div> 
+    <div id='subscribersDiv'></div>
+  </template>
+    <script src='//static.opentok.com/v2/js/opentok.min.js'></script> 
+    <script> 
+      var apiKey = '45260162';
+      var sessionId = '2_MX40NTI2MDE2Mn5-MTQzNDEyOTczMTk4Mn5OTVFGVUlJaHZsQ016TGdzcllTOFFwR3h-fg'; 
+      var token = 'T1==cGFydG5lcl9pZD00NTI2MDE2MiZzaWc9ZWQxYzZiZTFkYmFhY2I1OTM4Zjg1MDQ3NWI2MmUzNjA1ZjExOTNmZTpyb2xlPXB1Ymxpc2hlciZzZXNzaW9uX2lkPTJfTVg0ME5USTJNREUyTW41LU1UUXpOREV5T1Rjek1UazRNbjVPVFZGR1ZVbEphSFpzUTAxNlRHZHpjbGxUT0ZGd1IzaC1mZyZjcmVhdGVfdGltZT0xNDM0MTI5ODc4Jm5vbmNlPTAuNzA3MjU2MjE4MDUxNzU3OSZleHBpcmVfdGltZT0xNDM0MjE2Mjc4';
+      var session = OT.initSession(apiKey, sessionId); 
+      session.on({ 
+          streamCreated: function(event) { 
+            session.subscribe(event.stream, 'subscribersDiv', {insertMode: 'append'}); 
+          } 
+      }); 
+      session.connect(token, function(error) {
+        if (error) {
+          console.log(error.message);
+        } else {
+          session.publish('myPublisherDiv', {width: 320, height: 240}); 
+        }
+      });
+    </script> 
+<script>
+	Polymer({});
+</script>
+</polymer-element>
