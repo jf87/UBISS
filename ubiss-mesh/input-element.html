@@ -1,0 +1,37 @@
+<polymer-element name="input-element">
+    <template>
+        <style>
+            :host {
+                position: absolute;
+                top: 25;
+                left: 25;
+                min-width: 100px;
+					 background-color: white;
+            }
+        </style>
+				<paper-shadow class="card" z="2">
+				<paper-input-decorator label="Your Name" floatingLabel error="input is required!" autoValidate>
+      		<input is="core-input" value="{{uname}}" required valur=>
+    			</paper-input-decorator>
+
+				<paper-input-decorator label="Your Street Address, Post Code, Country" floatingLabel error="input is required!" autoValidate>
+      		<input is="core-input" value="{{address}}" required valur=>
+    			</paper-input-decorator>
+
+				<paper-input-decorator label="Your Request" floatingLabel error="input is required!" autoValidate>
+      		<input is="core-input" value="{{request}}" required valur=>
+    			</paper-input-decorator>
+				<button on-click="{{onClick}}">Send Request</button>
+				</paper-shadow>
+    </template>
+<script>
+	Polymer('input-element', {
+		uname : '',
+		address : '',
+		request : '',
+		onClick: function () {
+			$.post( "http://188.166.122.113:5000/requests", { name: this.uname, address: this.address, request: this.request } );
+		}
+	});
+</script>
+</polymer-element>
