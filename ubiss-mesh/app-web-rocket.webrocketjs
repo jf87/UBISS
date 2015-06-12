@@ -168,6 +168,7 @@ var WebRocketApplication = IApplication.$extend(
 
         return entity;
     },
+
     //Listen to camera changes (position/zoom) and scale the avatars
     onMousePress: function()
     {
@@ -175,15 +176,11 @@ var WebRocketApplication = IApplication.$extend(
         //can use targets list, given the objects have Geometry property:
         //mesh and others .. etc
         var r = Tundra.renderer.raycast();
-        if(r.entity && this.data[r.entity.id])
+        if(r.entity) 
         {
-            console.log(this.data[r.entity.id].title);
-            this.imageElement.attr("src", this.data[r.entity.id].link);
-            this.imageElement.show();
-        }
-        else
-        {
-            this.imageElement.hide();
+            var volunteer = webRocketApplication.volunteers.findWhere({"entity_id": r.entity.id})
+            if(volunteer)
+                console.log(volunteer);
         }
     },
 
