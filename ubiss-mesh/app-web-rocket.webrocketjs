@@ -1,57 +1,67 @@
-// Changes XML to JSON
-function xmlToJson(xml) {
+var base_url = "http://188.166.122.113:5000";
+
+var Volunteer = Backbone.Model.extend({
+    urlRoot: "/volunteers",
+    idAttribute: "volunteer_id",
+    defaults: {
+        volunteer_id: "",
+        latitude: null,
+        longitude: null,
+        status: "",
+        entity_id: null
+    }    
+});
+
+var Volunteers = Backbone.Collection.extend({
+    model: Volunteer,
+    url: base_url + "/volunteers",
+    initialize: function () {
     
-    // Create the return object
-    var obj = {};
+        // This will be called when an item is added. pushed or unshifted
+        this.on('add', function(model) {
+            console.log('### Volunteer got added: ' + model.id);
 
-    if (xml.nodeType == 1) { // element
-        // do attributes
-        if (xml.attributes.length > 0) {
-        obj["@attributes"] = {};
-            for (var j = 0; j < xml.attributes.length; j++) {
-                var attribute = xml.attributes.item(j);
-                obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+            var lat = model.get("latitude");
+            var lon = model.get("longitude");
+            var v_id = model.id;
+            var entity_id = model.get("entity_id");
+            if(lat && lon){
+                name = "vol_" + model.id;
+                var entity = webRocketApplication.createVolunteerEntity(lat, lon, name);
+                model.set("entity_id", entity.id);
+                console.log('>>> volunteer entity created: ', model.get("entity_id"));
             }
-        }
-    } else if (xml.nodeType == 3) { // text
-        obj = xml.nodeValue;
-    }
+        });
 
-    // do children
-    if (xml.hasChildNodes()) {
-        for(var i = 0; i < xml.childNodes.length; i++) {
-            var item = xml.childNodes.item(i);
-            var nodeName = item.nodeName;
-            if (typeof(obj[nodeName]) == "undefined") {
-                obj[nodeName] = xmlToJson(item);
-            } else {
-                if (typeof(obj[nodeName].push) == "undefined") {
-                    var old = obj[nodeName];
-                    obj[nodeName] = [];
-                    obj[nodeName].push(old);
+        // This will be called when an item is removed, popped or shifted
+        this.on('remove',  function(model) {
+            console.log('### Volunteer got removed: ' + model.id);
+        });
+
+        // This will be called when an item is updated
+        this.on('change', function(model) {
+            console.log('### Volunteer got changed: ' + model.id);
+            var lat = model.get("latitude");
+            var lon = model.get("longitude");
+            var v_id = model.id;
+            var entity_id = model.get("entity_id");
+            if(lat && lon){
+                if(entity_id){
+                    var entity = webRocketApplication.moveVolunteerEntity(entity_id, lat, lon);
+                    console.log('>>> volunteer entity moved: ', model.get("entity_id"));
                 }
-                obj[nodeName].push(xmlToJson(item));
+                else
+                {
+                    name = "vol_" + v_id;
+                    var entity = webRocketApplication.createVolunteerEntity(lat, lon, name);
+                    model.set("entity_id", entity.id);
+                    console.log('>>> volunteer entity created: ', model.get("entity_id"));
+                }
             }
-        }
-    }
-    return obj;
-};
+        });
+    },
+});
 
-function parseCoord(str)
-{
-    var coordArray = str.split(" ");
-    var coord = {};
-    var lon = parseFloat(coordArray[0]);
-    var lat = parseFloat(coordArray[1]);
-
-    if (!isNaN(lon))
-        coord.lon = lon;
-
-    if (!isNaN(lat))
-        coord.lat = lat;
-
-    return coord;
-}
 
 var WebRocketApplication = IApplication.$extend(
 {
@@ -98,15 +108,14 @@ var WebRocketApplication = IApplication.$extend(
 
         // Setup default environment
         Tundra.plugins.meshmoonGeo.setupEnvironment();
-
-        var p = IApplication.loadDependencies(this,"citizen-input-element_wip.html");
+        var p = IApplication.loadDependencies(this,"uuid-input-element.html");
         var _this = this;
         p.done(function(v){
-            console.log('loaded the new baby citizen polymer element! ');
-            _this.uiElement = document.createElement("citizen-input-element");
-            Tundra.ui.add([_this.uiElement]);
-            console.log('... and positioned it!');
-        });
+            console.log('loaded the new baby polymer element! ');
+            this.uiElement = document.createElement("uuid-input-element");
+            this.framework.ui.addWidgetToScene([this.uiElement]);
+            console.log('... and positioned it (legacy)!');
+        }.bind(this));
 
         this.imageElement = $("<img/>");
         this.imageElement.css({
@@ -120,45 +129,46 @@ var WebRocketApplication = IApplication.$extend(
 
         this.subscribeEvent(Tundra.input.onMousePress(this, this.onMousePress));
 
-        var transfer = Tundra.asset.requestAsset("http://www.oulunliikenne.fi/rss/weather_camera/camera.xml");
-        transfer.onCompleted(this, this.onAssetTransferCompleted);
+        this.volunteers = new Volunteers();
+        //var p = IApplication.loadDependencies(this,"uuid-input-element.html");
+        //var transfer = Tundra.asset.requestAsset("http://www.oulunliikenne.fi/rss/weather_camera/camera.xml");
+        //transfer.onCompleted(this, this.onAssetTransferCompleted);
     },
 
-    onAssetTransferCompleted: function(asset)
+    createVolunteerEntity: function(latitude, longitude, name)
     {
-        var obj = xmlToJson(asset.data);
-        //console.log(obj);
- 
-        if (obj.rss && obj.rss.channel && obj.rss.channel.item && typeof obj.rss.channel.item == "object")
-        {
-            var items = obj.rss.channel.item;
-            for (var i = 0; i < items.length; i++)
-            {
-                var oneItem = items[i];
-                if (typeof oneItem["georss:point"] != "object")
-                    continue;
- 
-                var coord = parseCoord(oneItem["georss:point"]["#text"]);
-                var pos = Tundra.plugins.meshmoonGeo.coordinates.latLonToWorldPosition(coord.lat, coord.lon);
-
-                var entity = Tundra.scene.createLocalEntity(["Name", "Mesh", "Placeable"]);
-                entity.name = "ent_" + i;
-                entity.mesh.meshRef = "http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere.mesh";
-                entity.mesh.materialRefs = ["http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere_yellow.material"];
-                entity.placeable.setPosition(new THREE.Vector3(pos.x, 150, pos.z));
-                entity.placeable.setScale(new THREE.Vector3(100, 100, 100));
-
-                this.data[entity.id] = {
-                    title : oneItem.title["#text"],
-                    link  : oneItem.link["#text"],
-                    entId : entity.id
-                };
-            }
-
-        }
+        var pos = Tundra.plugins.meshmoonGeo.coordinates.latLonToWorldPosition(latitude, longitude);
+        var entity = Tundra.scene.createLocalEntity(["Name", "Mesh", "Placeable"]);
+        entity.name = name;
+        //entity.mesh.meshRef = "http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere.mesh";
+        //entity.mesh.materialRefs = ["http://meshmoon.eu.scenes.1.s3.amazonaws.com/ligas-401829/test-layer/sphere/sphere_yellow.material"];
+        entity.mesh.meshRef = "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/avatar.mesh"
+        entity.mesh.materialRefs = ["http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/color.material",
+                                    "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/profile.material"]
+        entity.placeable.setPosition(new THREE.Vector3(pos.x, 150, pos.z));
+        entity.placeable.setScale(new THREE.Vector3(50, 50, 50));
+        debugger;
+        return entity;
     },
 
+    moveVolunteerEntity: function(entityId, latitude, longitude)
+    {
+        var pos = Tundra.plugins.meshmoonGeo.coordinates.latLonToWorldPosition(latitude, longitude);
+        var entity = Tundra.scene.entityById(entityId);
+        var oldpos = entity.placeable.position();
 
+        console.log("oldpos: ", oldpos.x, oldpos.z);
+        var tween = new TWEEN.Tween( { x: oldpos.x, z: oldpos.z } )
+                .to( { x: pos.x , z:pos.z}, 3000 )
+                .onUpdate( function () {
+                    console.log("tweening .. ", this.x, this.z);
+                    entity.placeable.setPosition(new THREE.Vector3(this.x, 150, this.z));
+                } )
+                .start();
+
+        return entity;
+    },
+    //Listen to camera changes (position/zoom) and scale the avatars
     onMousePress: function()
     {
         //raycastAll() to get multiple entity
@@ -217,3 +227,11 @@ var webRocketApplication = new WebRocketApplication();
 
 window.myApp = webRocketApplication;
 
+setInterval(function(){
+    console.log("sending request ...");
+    webRocketApplication.volunteers.fetch({
+        success: function (volunteers, response) {
+            console.log("Volunteers received:", volunteers);
+        },
+    });
+}.bind(webRocketApplication), 5000);
