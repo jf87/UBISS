@@ -1,0 +1,46 @@
+<polymer-element name="shopping-list-element">
+	<template is="auto-binding" id="shopping-list">
+		<style>
+            :host {
+                position: absolute;
+                top: 25;
+                left: 25;
+                min-width: 200px;
+            }
+    			core-list {
+      			border: solid 1px purple;
+    			   height: 200px;
+   			}
+      
+    			div.item {
+      			height: 30px;
+      			border: solid 1px Lavender;
+     				background: white;
+      			color: black;
+      			margin: 3px;
+      			padding: 4px;
+    			}
+		</style>
+
+    <div class="content" flex>
+      <core-list data="{{data}}" flex height="30">
+        <template>
+          <div class="item">
+            <span class="from">{{model.name}}</span>
+          </div>
+        </template>
+      </core-list>
+    </div>
+  </template>
+<script>
+    var cl = document.querySelector('#shopping-list');
+    names = [] ;
+    cl.data = [];
+    for (i = 0; i < names.length; i++) {
+      cl.data.push({name: names[i]});
+    };
+</script>
+<script>
+	Polymer({});
+</script>
+</polymer-element>

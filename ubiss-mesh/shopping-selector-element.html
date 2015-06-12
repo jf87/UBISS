@@ -1,0 +1,45 @@
+<polymer-element name="shopping-selector-element">
+	<template>
+		<style>
+            :host {
+                position: absolute;
+                top: 25;
+                left: 25;
+                min-width: 200px;
+            }
+				core-icon-button {
+      		background: #fff;
+    			}
+		</style>
+	<div>
+		<core-icon-button on-click="{{onClickGrapes}}" src="grapes1.png"></core-icon-button>
+		<core-icon-button on-click="{{onClickMilk}}" src="milk4.png"></core-icon-button>
+		<core-icon-button on-click="{{onClickWatermelon}}" src="watermelon2.png"></core-icon-button>
+		<core-icon-button on-click="{{onClickCheese}}" src="cheese2.png"></core-icon-button>
+		<core-icon-button on-click="{{onClickChicken}}" src="chicken4.png"></core-icon-button>
+		<core-icon-button on-click="{{onClickHamburger}}" src="hamburger2.png"></core-icon-button>
+	</div>
+	</template>
+<script>
+	Polymer('shopping-selector-element', {
+		onClickGrapes : function () {
+			names.push('Grapes');
+		},
+		onClickMilk : function () {
+			names.push('Milk');
+		},
+		onClickWatermelon : function () {
+			names.push('Watermelon');
+		},
+		onClickCheese : function () {
+			names.push('Cheese');
+		},
+		onClickChicken : function () {
+			names.push('Chicken');
+		},
+		onClickHamburger : function () {
+			names.push('Hamburger');
+		}
+	});
+</script>
+</polymer-element>
