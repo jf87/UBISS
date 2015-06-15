@@ -128,7 +128,7 @@ var WebRocketApplication = IApplication.$extend(
         });
 
         this.cameraEnt = Tundra.scene.createLocalEntity(["Name", "Placeable", "Camera"]);
-        this.cameraEnt.placeable.setPosition(0, 10, 0);
+        this.cameraEnt.placeable.setPosition(0, 5, 0);
         this.cameraEnt.placeable.setRotation(-45, 0, 0);
         //this.rtsCamera = Tundra.renderer.activeCamera();
 
@@ -208,8 +208,7 @@ var WebRocketApplication = IApplication.$extend(
         var entity = Tundra.scene.createLocalEntity(["Name", "Mesh", "Placeable"]);
         entity.name = name;
         entity.mesh.meshRef = "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/avatar.mesh"
-        entity.mesh.materialRefs = ["http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/color.material",
-                                    "http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/profile.material"]
+        entity.mesh.materialRefs = ["http://meshmoon.s3.amazonaws.com/releases/meshmoon-applications/stable/meshmoon/user-presence/files/avatar-button/color.material"]
         
         entity.placeable.setPosition(new THREE.Vector3(pos.x, 8, pos.z));
         entity.placeable.setRotation(30,0,0);
@@ -359,4 +358,4 @@ setInterval(function(){
             webRocketApplication.updateUserTexture();
         }
     });
-}.bind(webRocketApplication), 30000);
+}.bind(webRocketApplication), 5000);
